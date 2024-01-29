@@ -1,5 +1,5 @@
 test:
-	gcc -Wall -Wextra src/test.c src/utils/*.c -o prog
+	gcc -Wall -Wextra src/test.c src/utils/*.c -o prog && ./prog
 
 # what the final build file will be called
 TARGET = simpleserial-homemade-rsa
