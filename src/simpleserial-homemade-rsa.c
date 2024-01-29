@@ -24,8 +24,17 @@ int main(void)
     trigger_setup();
     simpleserial_init();
 
-    // tell simpleserial_get to look for 'p' and 'k' packets
-    // and to do these two functions when they're received
+    // Defining commands
+    /*
+		1. `set_key` : (big_int p, big_int q, big_int e)
+	Set p, q, e and compute N, phi and d
+
+		2. `encrypt` : (big_int m)
+	Set m and compute c with c = m^e mod N
+
+		3. `decrypt` : (big_int c) 
+	Set c and compute m with m = c^d mod N
+    */
     simpleserial_addcmd('p', 16, xor_inc);
     simpleserial_addcmd('k', 16, get_key);
 
