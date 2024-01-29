@@ -4,3 +4,4 @@
 *.out
 *.synctex.gz
 prog
+src/prog
