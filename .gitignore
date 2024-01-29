@@ -10,4 +10,4 @@ src/objdir-*
 src/*.map
 src/simpleserial-homemade-rsa-*
 src/prog
-jupyter/.ipynb_checkpoints
+jupyter/.ipynb_checkpoints/
