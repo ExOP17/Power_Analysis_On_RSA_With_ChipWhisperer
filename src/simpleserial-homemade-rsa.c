@@ -1,5 +1,5 @@
-#include "hal.h"
-#include "simpleserial.h"
+// #include "hal.h"
+// #include "simpleserial.h"
 #include "utils/utils.h"
 
 #include <stdio.h>
@@ -7,14 +7,15 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-big_int p = 11;
-big_int q = 17;
-big_int N = p * q;
+const big_int p = 11;
+const big_int q = 17;
+const big_int N = p * q;
 
-big_int phi = (p-1) * (q-1);
-big_int e = 7;
-big_int m = 78;
-big_int d = inverse_mod(e, phi);
+const big_int phi = (p-1) * (q-1);
+const big_int e = 7;
+const big_int m = 78;
+// const big_int d = inverse_mod(e, phi);
+const big_int d = 5;
 
 int main(void)
 {
@@ -35,9 +36,9 @@ int main(void)
 		3. `decrypt` : (big_int c) 
 	Set c and compute m with m = c^d mod N
     */
-    simpleserial_addcmd('s', 16, xor_inc);
-    simpleserial_addcmd('e', 16, get_key);
-    simpleserial_addcmd('d', 16, get_key);
+    // simpleserial_addcmd('s', 16, xor_inc);
+    // simpleserial_addcmd('e', 16, get_key);
+    // simpleserial_addcmd('d', 16, get_key);
 
     // look for simpleserial packets
     while(1)

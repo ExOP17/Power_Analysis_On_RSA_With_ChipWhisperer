@@ -5,3 +5,8 @@
 *.synctex.gz
 prog
 src/prog
+src/.dep
+src/objdir-*
+src/*.map
+src/simpleserial-homemade-rsa-*
+src/prog
