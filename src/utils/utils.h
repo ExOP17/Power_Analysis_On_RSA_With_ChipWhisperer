@@ -6,7 +6,7 @@
 */
 
 // Types definition
-typedef unsigned long long int big_int;
+typedef uint64_t big_int;
 
 // Prototypes
 big_int poow(big_int base, big_int exposant, big_int modulus); // pow(b, e, N) = b^e mod N
