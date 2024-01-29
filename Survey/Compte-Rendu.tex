@@ -1,0 +1,102 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage[pdftex,pdfborder={0 0 0}]{hyperref}
+\usepackage{mathpazo} % Utilisation de la police Palatino
+
+% Mise en page
+\geometry{margin=2.5cm}
+
+% Configuration de fancyhdr pour les entêtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{} % Efface tous les en-têtes et pieds de page existants
+
+% En-tête
+\fancyhead[L]{\includegraphics[width=2cm]{logo.png}}
+\fancyhead[C]{\textbf{RSA power analysis attack with ChipWhisperer}}
+\fancyhead[R]{\thepage}
+
+% Pied de page
+\fancyfoot[C]{}
+
+% Personnalisation des sections
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+
+\begin{document}
+
+% Page de garde
+\begin{titlepage}
+  \vspace*{-2cm}
+  \hspace*{-2cm}\includegraphics[scale=0.6]{logo.png}
+  \vspace*{-2cm}
+  \hspace*{7cm}\includegraphics[scale=0.6]{logo2.png}\par
+  \vspace{4cm}
+  \centering
+  {\scshape\LARGE \textbf{ENSIBS} \par}
+
+  \vspace{1cm}
+  {\scshape\Large PRJ 1401 \par}
+  \vspace{1cm}
+  \rule{\linewidth}{0.4mm}\par % Largeur de \linewidth et épaisseur de 0.7mm
+  \vspace{1cm}
+  {\huge\bfseries RSA power analysis attack with ChipWhisperer \par}
+  \vspace{1cm}
+  \rule{\linewidth}{0.4mm}\par % Largeur de \linewidth et épaisseur de 0.7mm
+  \par
+  \vspace{1cm}
+  {\Large\itshape Cizdziel Matthieu, Richard Etienne, Moguedet Mathis\par}
+  \vspace{1cm}
+  {\Large\itshape PEI-2\par}
+  \vspace{3cm}
+  \par
+  {\Large\itshape Supervised by Guy Gogniat\par}
+  \vfill
+  {\large \today\par}
+\end{titlepage}
+
+\newpage
+
+% Table des matières
+\tableofcontents
+\newpage
+
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[scale=1]{nom_du_fichier.png}
+%   \caption{nom du graphique}
+% \end{figure}
+
+% Contenu du TP
+\section{ChipWhisperer}
+\subsection{ChipWhisperer's purpose}
+ChipWhisperer is used to make power analysis attacks easy by making a confined environment that we can analyze. It also provides a lot of crypto-firmware that we can attack with some side channel attack's tutorials.
+\subsection{ChipWhisperer's components }
+
+\noindent ChipWhisperer is made of 2 main components :
+\begin{itemize}
+\item{a capture board used to record the current consumption and make the interface between the computer and the crypto-processor}
+\item{a target board used to plug a target chip onto.The target board is useful to quickly switch from a target chip to another one} 
+\end{itemize}
+
+The target chip is the place where the firmware we want to analyze is running. This chip is only running our firmware so we don't have electrical noise on the analysis. The capture board is used to send the request to the target device and receive the output of the firmware, this board also record the current consumption of the target device. By slicing the work of a computer with two boards, the ChipWhisperer tool allow us to run our firmware in a confined space.
+
+\section{Building our own Firmware}
+\subsection{Communication between the computer and the ChipWhisperer}
+To send the information from the computer to the ChipWhisperer, we use the "simpleserail.h" librairy.
+
+% Votre discussion ici...
+
+\section{Conclusion}
+% Votre conclusion ici...
+
+\end{document}
