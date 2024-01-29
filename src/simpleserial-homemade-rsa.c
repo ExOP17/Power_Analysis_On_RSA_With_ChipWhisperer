@@ -36,9 +36,9 @@ int main(void)
 		3. `decrypt` : (big_int c) 
 	Set c and compute m with m = c^d mod N
     */
-    // simpleserial_addcmd('s', 16, xor_inc);
-    // simpleserial_addcmd('e', 16, get_key);
-    // simpleserial_addcmd('d', 16, get_key);
+    // simpleserial_addcmd('s', 16, TODO);
+    // simpleserial_addcmd('e', 16, TODO);
+    // simpleserial_addcmd('d', 16, TODO);
 
     // look for simpleserial packets
     while(1)

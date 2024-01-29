@@ -1,3 +1,8 @@
+/*
+    Taken from https://gist.github.com/hellman/c10a7a0dfe7f70d3615269b020aa3286
+    We are using this code as a template for our code
+*/
+
 #include "hal.h"
 #include "simpleserial.h"
 
