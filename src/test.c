@@ -1,3 +1,11 @@
+/*
+	A simple test code to check that our lib is working fine !
+
+	Build and exec : 
+	gcc test.c utils/*.c -o prog && ./prog
+*/
+
+
 #include <stdio.h>
 #include "utils/utils.h"
 

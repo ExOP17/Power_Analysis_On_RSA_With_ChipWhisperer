@@ -6,7 +6,7 @@ This repo is made for explain and follow up on our advancement about our school 
 The target of this project is to make a power analysis attack on RSA 
 To set up it we use a ChipWhisperer 
 
-## Building
+## How to build our own firmware
 
 ```console
 cd src/
