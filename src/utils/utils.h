@@ -16,4 +16,6 @@ big_int decrypt(big_int c, big_int d, big_int N); // m = c^d mod N
 void swap(big_int *a, big_int *b); // Swapping two variables
 
 
+
+
 #endif
