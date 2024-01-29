@@ -1,6 +1,8 @@
 #ifndef _UTILS_H_
 #define _UTILS_H_
 
+#include <stdint.h>
+
 /*
 	* TODO : Implenting our own big_int library
 */

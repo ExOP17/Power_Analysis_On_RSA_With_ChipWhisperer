@@ -15,18 +15,18 @@ int main(void)
 	big_int c = encrypt(m, e, N);
 
 	printf("All parameters: \n");
-	printf("p = %llu ; q = %llu ; N = %llu ; e = %llu ; phi = %llu ; d = %llu\n", p, q, N, e, phi, d);
+	printf("p = %lu ; q = %lu ; N = %lu ; e = %lu ; phi = %lu ; d = %lu\n", p, q, N, e, phi, d);
 
 	printf("Public key : \n");
-	printf("(e, N) = (%llu, %llu)\n", e, N);
+	printf("(e, N) = (%lu, %lu)\n", e, N);
 
 	printf("Private key : \n");
-	printf("(d, N) = (%llu, %llu)\n", d, N);
+	printf("(d, N) = (%lu, %lu)\n", d, N);
 
-    printf("We are encrypting m = %llu in c = %llu\n", m, encrypt(m, e, N));
+    printf("We are encrypting m = %lu in c = %lu\n", m, encrypt(m, e, N));
 
     big_int new_m = decrypt(c, d, N);
-    printf("And after decrypting c = %llu we get m = %llu\n", c, new_m);
+    printf("And after decrypting c = %lu we get m = %lu\n", c, new_m);
 
     printf("Hope this return `1` : %d\n", new_m == m);
 
