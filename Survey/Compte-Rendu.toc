@@ -1,7 +1,0 @@
-\babel@toc {french}{}\relax 
-\contentsline {section}{\numberline {1}ChipWhisperer}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}ChipWhisperer's purpose}{2}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}ChipWhisperer's components }{2}{subsection.1.2}%
-\contentsline {section}{\numberline {2}Building our own Firmware}{2}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Communication between the computer and the ChipWhisperer}{2}{subsection.2.1}%
-\contentsline {section}{\numberline {3}Conclusion}{2}{section.3}%
