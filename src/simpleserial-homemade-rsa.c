@@ -27,15 +27,16 @@ big_int d = 5;
 
 uint8_t* key;
 
-big_int bytes_to_big_int(n,v){
-    big_int p = 0; 
-    big_int res = 0;
-    for(int i = n; i>0;i--){
-        res += v[i] * pow(256,p);
+big_int bytes_to_big_int(int n,uint8_t* v)
+{
+    int p = 0; 
+    int res = 0;
+    for(int i = n-1; i>=0;i--)
+    {
+        res += v[i] * poow(256,p,10000);
         p++;
     }
-    return res;
-
+    return res; 
 }
 // uint8_t set_key(uint8_t cmd, uint8_t scmd, uint8_t dlen, uint8_t* data)
 // {
