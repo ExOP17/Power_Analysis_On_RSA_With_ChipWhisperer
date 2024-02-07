@@ -25,7 +25,7 @@ big_int m = 78;
 d = inverse_mod(e, phi);
 big_int d = 5;
 
-uint8_t* key;
+big_int key;
 
 big_int bytes_to_big_int(int n,uint8_t* v)
 {
@@ -68,6 +68,11 @@ uint8_t get_pt(uint8_t* pt, uint8_t len)
     simpleserial_put('r', 16, key);
     return 0x00;
 }
+uint8_t RSA_gen_key(uint8_t* pt,uint8_t len)
+{
+    Rsa_key = gen_key();
+    return 0x00;
+}
 
 int main(void)
 {
@@ -89,6 +94,7 @@ int main(void)
 	Set c and compute m with m = c^d mod N
     */
     simpleserial_addcmd('p', 16, get_pt);
+    simpleserial_addcmd('g', 16, RSA_gen_key);
     // simpleserial_addcmd('s', 16, set_key);
     // simpleserial_addcmd('p', 16, get_pt);
 
