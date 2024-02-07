@@ -3,7 +3,7 @@ TARGET = simpleserial-homemade-rsa
 # our C firmware file
 SRC += simpleserial-homemade-rsa.c
 # Use simpleserial 1
-SS_VER = SS_VER_2_1
+SS_VER = SS_VER_1_1
 # No crypto required
 CRYPTO_TARGET = NONE
 # Choosing platform

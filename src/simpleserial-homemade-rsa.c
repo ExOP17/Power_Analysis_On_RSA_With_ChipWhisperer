@@ -15,23 +15,26 @@ const big_int p = 11;
 const big_int q = 17;
 const big_int N = p * q;
 
+const data_test[16] = {0x11, 0x22, 0x33, 0x11, 0x22, 0x33, 0x11, 0x22, 0x33, 0x11, 0x22, 0x33, 0x11, 0x22, 0x33, 0x11};
+
+big_int d = 0;
 big_int phi = (p-1) * (q-1);
 big_int e = 7;
 big_int m = 78;
-// const big_int d = inverse_mod(e, phi);
+d = inverse_mod(e, phi);
 big_int d = 5;
 
-uint8_t set_key(uint8_t cmd, uint8_t scmd, uint8_t dlen, uint8_t* data)
-{
-    simpleserial_put('r', dlen, data);
-    // d = *(big_int*) data;
+// uint8_t set_key(uint8_t cmd, uint8_t scmd, uint8_t dlen, uint8_t* data)
+// {
+//     simpleserial_put('r', 16, data_test);
+//     // d = *(big_int*) data;
 
-    // char debug_string[15];
-    // sprintf(debug_string, "pipicacaprout\n");
-    // simpleserial_put('r', 15, debug_string);
+//     // char debug_string[15];
+//     // sprintf(debug_string, "pipicacaprout\n");
+//     // simpleserial_put('r', 15, debug_string);
 
-    return 1;
-}
+//     return 1;
+// }
 
 uint8_t get_pt(uint8_t* pt, uint8_t len)
 {
@@ -71,7 +74,8 @@ int main(void)
 		3. `decrypt` : (big_int c) 
 	Set c and compute m with m = c^d mod N
     */
-    simpleserial_addcmd('s', 8, set_key);
+    simpleserial_addcmd('p', 16, get_pt);
+    // simpleserial_addcmd('s', 16, set_key);
     // simpleserial_addcmd('p', 16, get_pt);
 
     // simpleserial_addcmd('e', 16, TODO);
