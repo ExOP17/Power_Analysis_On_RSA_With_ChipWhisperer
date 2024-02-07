@@ -17,11 +17,12 @@ uint64_t c = 0x5f4a3dc8;
 
 uint8_t rsa_set_d(uint8_t * pt, uint8_t len) {
     d = *(uint64_t*)pt;
-    // char num[32];
-    // sprintf(num, "d=%llx\n", d);
-    // simpleserial_put('r', 32, num);
+    char num[32];
+    sprintf(num, "d=%llx\n", d);
+    simpleserial_put('r', 32, num);
     return 0;
 }
+
 uint8_t rsa_decrypt(uint8_t * pt, uint8_t len) {
     trigger_high();
 

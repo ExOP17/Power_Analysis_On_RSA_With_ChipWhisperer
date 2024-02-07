@@ -11,11 +11,42 @@ const big_int p = 11;
 const big_int q = 17;
 const big_int N = p * q;
 
-const big_int phi = (p-1) * (q-1);
-const big_int e = 7;
-const big_int m = 78;
+big_int phi = (p-1) * (q-1);
+big_int e = 7;
+big_int m = 78;
 // const big_int d = inverse_mod(e, phi);
-const big_int d = 5;
+big_int d = 5;
+
+uint8_t set_key(uint8_t cmd, uint8_t scmd, uint8_t dlen, uint8_t* data)
+{
+    simpleserial_put('r', dlen, data);
+    // d = *(big_int*) data;
+
+    // char debug_string[15];
+    // sprintf(debug_string, "pipicacaprout\n");
+    // simpleserial_put('r', 15, debug_string);
+
+    return 1;
+}
+
+uint8_t get_pt(uint8_t* pt, uint8_t len)
+{
+    /**********************************
+    * Start user-specific code here. */
+    trigger_high();
+
+    //16 hex bytes held in 'pt' were sent
+    //from the computer. Store your response
+    //back into 'pt', which will send 16 bytes
+    //back to computer. Can ignore of course if
+    //not needed
+
+    trigger_low();
+    /* End user-specific code here. *
+    ********************************/
+    simpleserial_put('r', 16, pt);
+    return 0x00;
+}
 
 int main(void)
 {
@@ -36,11 +67,15 @@ int main(void)
 		3. `decrypt` : (big_int c) 
 	Set c and compute m with m = c^d mod N
     */
-    // simpleserial_addcmd('s', 16, TODO);
+    simpleserial_addcmd('s', 8, set_key);
+    // simpleserial_addcmd('p', 16, get_pt);
+
     // simpleserial_addcmd('e', 16, TODO);
     // simpleserial_addcmd('d', 16, TODO);
 
     // look for simpleserial packets
     while(1)
         simpleserial_get();
+
+    return 1;
 }
