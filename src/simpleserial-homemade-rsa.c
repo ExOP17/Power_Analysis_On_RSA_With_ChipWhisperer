@@ -1,10 +1,14 @@
-// #include "hal.h"
-// #include "simpleserial.h"
+// Chipwhisperer things
+#include "hal.h"
+#include "simpleserial.h"
+
+// Our thingss
 #include "utils/utils.h"
 
+// Libc tthingsh
 #include <stdio.h>
 #include <string.h>
-#include <stdint.h>
+#include <stdint.h> 
 #include <stdlib.h>
 
 const big_int p = 11;
@@ -77,5 +81,5 @@ int main(void)
     while(1)
         simpleserial_get();
 
-    return 1;
+    return 0;
 }
