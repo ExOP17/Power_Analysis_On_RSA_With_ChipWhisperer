@@ -28,8 +28,8 @@ big_int d = 5;
 uint8_t* key;
 
 big_int bytes_to_big_int(n,v){
-    p = 0; 
-    res = 0;
+    big_int p = 0; 
+    big_int res = 0;
     for(int i = n; i>0;i--){
         res += v[i] * pow(256,p);
         p++;
