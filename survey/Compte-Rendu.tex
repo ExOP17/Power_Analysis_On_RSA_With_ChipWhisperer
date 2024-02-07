@@ -89,6 +89,22 @@ ChipWhisperer is used to make power analysis attacks easy by making a confined e
 
 The target chip is the place where the firmware we want to analyze is running. This chip is only running our firmware so we don't have electrical noise on the analysis. The capture board is used to send the request to the target device and receive the output of the firmware, this board also record the current consumption of the target device. By slicing the work of a computer with two boards, the ChipWhisperer tool allow us to run our firmware in a confined space.
 
+\pagebreak
+\section{First attack on RSA}
+For our first side channel attack on RSA we used an open source firmware and notebook found on github.
+This firmware use the square and multiply algorithm so the attack was based on it.
+Theses opensource files helped us to understand the using of simpleserial, a Chipwhisperer's library.
+Finally we got the following output from the capture-board.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{../assets/img/first_attack.png}
+  \caption{Currant consumption of the target}
+\end{figure}
+
+As we can see for every bit of the private key we can retrieve to correct value.
+
+
 \section{Building our own Firmware}
 \subsection{Communication between the computer and the ChipWhisperer}
 To send the information from the computer to the ChipWhisperer, we use the "simpleserial.h" librairy.
