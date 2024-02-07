@@ -10,6 +10,7 @@
 #include <string.h>
 #include <stdint.h> 
 #include <stdlib.h>
+#include <math.h>
 
 const big_int p = 11;
 const big_int q = 17;
@@ -24,6 +25,18 @@ big_int m = 78;
 d = inverse_mod(e, phi);
 big_int d = 5;
 
+uint8_t* key;
+
+big_int bytes_to_big_int(n,v){
+    p = 0; 
+    res = 0;
+    for(int i = n; i>0;i--){
+        res += v[i] * pow(256,p);
+        p++;
+    }
+    return res;
+
+}
 // uint8_t set_key(uint8_t cmd, uint8_t scmd, uint8_t dlen, uint8_t* data)
 // {
 //     simpleserial_put('r', 16, data_test);
@@ -41,7 +54,7 @@ uint8_t get_pt(uint8_t* pt, uint8_t len)
     /**********************************
     * Start user-specific code here. */
     trigger_high();
-
+    key = pt;
     //16 hex bytes held in 'pt' were sent
     //from the computer. Store your response
     //back into 'pt', which will send 16 bytes
@@ -51,7 +64,7 @@ uint8_t get_pt(uint8_t* pt, uint8_t len)
     trigger_low();
     /* End user-specific code here. *
     ********************************/
-    simpleserial_put('r', 16, pt);
+    simpleserial_put('r', 16, key);
     return 0x00;
 }
 
