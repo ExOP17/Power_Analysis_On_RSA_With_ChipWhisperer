@@ -1,30 +1,40 @@
 #include "utils.h"
 
-typdef struct rsa_key Rsa_Key;
-struct rsa_key{
-    big_int p;
-    big_int q;
-    big_int e;
-    big_int d;
-    big_int n;
-    big_int phi;
-};
+RsaKey gen_key()
+{
+    // srand(0);
 
-Rsa_key gen_key(){
+    // big_int p = rand();
+    // big_int q = rand();
+    big_int p = 7;
+    big_int q = 5;
 
-    srand(2234554345147395);
+    big_int phi = (p-1)*(q-1);
+    big_int n = p*q;
 
-    big_int p random_number = rand();
-    big_int q random_number = rand();
+    big_int e = 0;
+    for(big_int i = 3; i < n; i++)
+    {
+        if (gcd(phi, i) == 1)
+        {
+            printf("prout\n");
+            e = i;
+            break;
+        }
+    }
 
-    phi = (p-1)*(q-1);
-    n = p*q;
-    e = 3;
-    d = inverse_mod(e,phi);
+    big_int d = inverse_mod(e,phi);
     
-    return (Rsa_Key) = {p,q,e,d,n,phi};
+    return (RsaKey){n, e, d, p, q, phi};
+}
 
+void show_key(RsaKey rk)
+{
+    printf("Public key = (%lu, %lu)\n", rk.e, rk.n);
+    printf("Private key = (%lu, %lu)\n", rk.d, rk.n);
+    printf("(p, q, phi) = (%lu, %lu, %lu)\n", rk.p, rk.q, rk.phi);
 
+    return;
 }
 
 big_int encrypt(big_int m, big_int e, big_int N)

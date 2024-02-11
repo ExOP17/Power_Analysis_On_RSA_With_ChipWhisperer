@@ -9,8 +9,13 @@
 #include <stdio.h>
 #include "utils/utils.h"
 
+RsaKey global_key = {0};
+
 int main(void)
 {
+	global_key = gen_key();
+	show_key(global_key);
+
 	big_int p = 11;
 	big_int q = 17;
 	big_int N = p * q;

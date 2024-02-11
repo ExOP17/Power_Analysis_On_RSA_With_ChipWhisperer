@@ -1,5 +1,17 @@
 #include "utils.h"
 
+big_int bytes_to_big_int(int n, uint8_t* v)
+{
+    int p = 0; 
+    int res = 0;
+    for(int i = n-1; i>=0;i--)
+    {
+        res += v[i] * poow(256,p,10000);
+        p++;
+    }
+    return res; 
+}
+
 big_int poow(big_int base, big_int exposant, big_int modulus)
 { 
     base %= modulus;
@@ -54,6 +66,22 @@ big_int inverse_mod(big_int a, big_int n)
         return (v % new_a);
     }
 }
+
+// Taken from https://www.geeksforgeeks.org/gcd-in-c/
+big_int gcd(big_int a, big_int b) 
+{ 
+    // Find Minimum of a and b 
+    big_int result = ((a < b) ? a : b); 
+    while (result > 0) { 
+        // Check if both a and b are divisible by result 
+        if (a % result == 0 && b % result == 0) { 
+            break; 
+        } 
+        result--; 
+    } 
+    // return gcd of a nd b 
+    return result; 
+} 
 
 void swap(big_int *a, big_int *b)
 {
