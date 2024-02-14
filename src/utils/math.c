@@ -1,5 +1,7 @@
 #include "utils.h"
 
+extern RsaKey global_key;
+
 big_int bytes_to_big_int(int n, uint8_t* v)
 {
     int p = 0; 

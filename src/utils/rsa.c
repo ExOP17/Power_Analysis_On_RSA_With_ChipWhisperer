@@ -1,5 +1,7 @@
 #include "utils.h"
 
+extern RsaKey global_key;
+
 RsaKey gen_key()
 {
     // srand(0);

@@ -22,7 +22,7 @@ struct RsaKey {
 };
 
 // Global variable
-static RsaKey global_key = {0};
+// static RsaKey global_key = {0};
 
 // Prototypes
 void show_key(RsaKey rk);
