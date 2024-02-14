@@ -12,8 +12,11 @@
 #include <stdlib.h>
 #include <math.h>
 
-RsaKey global_key = {0};
-SecretData global_sd = {0};
+#include "utils/key.h"
+
+
+// RsaKey global_key = {0};
+// SecretData global_sd = {0};
 
 int main(void)
 {
@@ -42,10 +45,7 @@ int main(void)
     Send `d` to the computer
     */
     // simpleserial_addcmd('p', 16, get_pt);
-    uint8_t pt[3] = {0};
-    uint8_t len = 4;
 
-    gen_key(pt, len);
     simpleserial_addcmd('g', 0, gen_key);
     simpleserial_addcmd('d', 0, get_d);
     // simpleserial_addcmd('s', 16, set_key);

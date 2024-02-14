@@ -1,7 +1,8 @@
 #include "utils.h"
+#include "key.h"
 
-extern RsaKey global_key;
-extern SecretData global_sd;
+// extern RsaKey global_key;
+// extern SecretData global_sd;
 
 void show_key(RsaKey rk)
 {
