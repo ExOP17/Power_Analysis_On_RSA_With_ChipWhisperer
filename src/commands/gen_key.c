@@ -31,5 +31,6 @@ uint8_t gen_key(uint8_t * pt, uint8_t len)
     
     // set_key()
     // global_key = (RsaKey){n, e, d, p, q, phi};
+    set_global_key((RsaKey){n, e, d, p, q, phi});
     return 0x00;
 }
