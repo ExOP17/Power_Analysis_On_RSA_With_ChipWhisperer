@@ -7,15 +7,25 @@
 
 
 #include <stdio.h>
-#include "utils/utils.h"
+#include <stdint.h>
 
-RsaKey global_key = {0};
-SecretData global_sd = {0};
+// #include "utils/utils.h"
+
+typedef uint64_t big_int;
+
+
+// RsaKey global_key = {0};
+// SecretData global_sd = {0};
 
 int main(void)
 {
-	gen_key();
-	show_key(global_key);
+	big_int a = 45454;
+
+	char d_as_bytes[8] = {0};
+	sprintf(d_as_bytes, "%lu", a);
+
+	for(int i = 0; i < 8; i++)
+		printf("%c", d_as_bytes[i]);
 
 	// big_int p = 11;
 	// big_int q = 17;

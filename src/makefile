@@ -2,6 +2,14 @@
 TARGET = simpleserial-homemade-rsa
 # our C firmware file
 SRC += simpleserial-homemade-rsa.c
+SRC += utils/math.c
+SRC += utils/rsa.c
+SRC += utils/global_variable.c
+SRC += commands/encrypt.c
+SRC += commands/gen_key.c
+SRC += commands/get_d.c
+# SRC += utils/*.c
+# SRC += commands/*.c
 # Use simpleserial 1
 SS_VER = SS_VER_1_1
 # No crypto required

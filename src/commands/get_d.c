@@ -3,9 +3,11 @@
 extern RsaKey global_key;
 extern SecretData global_sd;
 
-uint8_t your_function(uint8_t * pt, uint8_t len) {
+uint8_t get_d(uint8_t * pt, uint8_t len)
+{
+	uint8_t d_as_bytes[8];
+	sprintf(d_as_bytes, "%llu", get_value());
 
-	// https://chipwhisperer.readthedocs.io/en/latest/simpleserial.html
-
+    // simpleserial_put('r', 8, d_as_bytes);
     return 0;
 }

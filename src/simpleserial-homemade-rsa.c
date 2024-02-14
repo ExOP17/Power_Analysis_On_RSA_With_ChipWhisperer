@@ -41,13 +41,17 @@ int main(void)
         4. `get_d` : (big_int c) 
     Send `d` to the computer
     */
-    simpleserial_addcmd('p', 16, get_pt);
-    simpleserial_addcmd('g', 16, RSA_gen_key);
+    // simpleserial_addcmd('p', 16, get_pt);
+    uint8_t pt[3] = {0};
+    uint8_t len = 4;
+
+    gen_key(pt, len);
+    simpleserial_addcmd('g', 0, gen_key);
+    simpleserial_addcmd('d', 0, get_d);
     // simpleserial_addcmd('s', 16, set_key);
     // simpleserial_addcmd('p', 16, get_pt);
 
     // simpleserial_addcmd('e', 16, TODO);
-    // simpleserial_addcmd('d', 16, TODO);
 
     // look for simpleserial packets
     while(1)

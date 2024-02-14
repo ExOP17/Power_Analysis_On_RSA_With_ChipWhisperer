@@ -3,39 +3,11 @@
 extern RsaKey global_key;
 extern SecretData global_sd;
 
-RsaKey gen_key()
-{
-    // srand(0);
-
-    // big_int p = rand();
-    // big_int q = rand();
-    big_int p = 7;
-    big_int q = 5;
-
-    big_int phi = (p-1)*(q-1);
-    big_int n = p*q;
-
-    big_int e = 0;
-    for(big_int i = 3; i < n; i++)
-    {
-        if (gcd(phi, i) == 1)
-        {
-            e = i;
-            break;
-        }
-    }
-
-    big_int d = inverse_mod(e,phi);
-    
-    global_key = (RsaKey){n, e, d, p, q, phi};
-    return global_key;
-}
-
 void show_key(RsaKey rk)
 {
-    printf("Public key = (%lu, %lu)\n", rk.e, rk.n);
-    printf("Private key = (%lu, %lu)\n", rk.d, rk.n);
-    printf("(p, q, phi) = (%lu, %lu, %lu)\n", rk.p, rk.q, rk.phi);
+    printf("Public key = (%llu, %llu)\n", rk.e, rk.n);
+    printf("Private key = (%llu, %llu)\n", rk.d, rk.n);
+    printf("(p, q, phi) = (%llu, %llu, %llu)\n", rk.p, rk.q, rk.phi);
 
     return;
 }
