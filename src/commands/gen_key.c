@@ -1,5 +1,5 @@
 #include "../utils/utils.h"
-#include "../utils/key.h"
+#include "../utils/global_variable.h"
 
 
 // extern RsaKey global_key;
