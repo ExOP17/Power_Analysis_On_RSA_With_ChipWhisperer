@@ -1,6 +1,7 @@
 #include "utils.h"
 
 extern RsaKey global_key;
+extern SecretData global_sd;
 
 RsaKey gen_key()
 {
