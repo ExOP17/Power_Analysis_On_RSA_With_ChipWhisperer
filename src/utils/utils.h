@@ -11,6 +11,7 @@
 
 // Types definition
 typedef uint64_t big_int;
+
 typedef struct RsaKey RsaKey;
 struct RsaKey {
     big_int n;
@@ -19,6 +20,12 @@ struct RsaKey {
     big_int p;
     big_int q;
     big_int phi;
+};
+
+typedef struct SecretData SecretData;
+struct SecretData {
+    big_int pt;
+    big_int ct;
 };
 
 // Global variable

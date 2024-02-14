@@ -10,6 +10,7 @@
 #include "utils/utils.h"
 
 RsaKey global_key = {0};
+SecretData global_sd = {0};
 
 int main(void)
 {

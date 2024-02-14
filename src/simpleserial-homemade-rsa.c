@@ -12,7 +12,8 @@
 #include <stdlib.h>
 #include <math.h>
 
-// RsaKey global_key;
+RsaKey global_key = {0};
+SecretData global_sd = {0};
 
 int main(void)
 {
