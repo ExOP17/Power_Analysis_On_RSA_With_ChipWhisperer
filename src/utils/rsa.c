@@ -17,7 +17,6 @@ RsaKey gen_key()
     {
         if (gcd(phi, i) == 1)
         {
-            printf("prout\n");
             e = i;
             break;
         }
@@ -25,7 +24,8 @@ RsaKey gen_key()
 
     big_int d = inverse_mod(e,phi);
     
-    return (RsaKey){n, e, d, p, q, phi};
+    global_key = (RsaKey){n, e, d, p, q, phi};
+    return global_key;
 }
 
 void show_key(RsaKey rk)

@@ -21,6 +21,9 @@ struct RsaKey {
     big_int phi;
 };
 
+// Global variable
+static RsaKey global_key = {0};
+
 // Prototypes
 void show_key(RsaKey rk);
 big_int gcd(big_int a, big_int b);
