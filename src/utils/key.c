@@ -3,9 +3,9 @@
 
 RsaKey global_key = {0};
 
-void set_key(big_int d)
+void set_global_key(RsaKey rsa_key)
 	{
-		global_key.d = d;
+		global_key = rsa_key;
 	}
 	
 

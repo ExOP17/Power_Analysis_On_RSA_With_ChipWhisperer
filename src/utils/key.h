@@ -6,7 +6,6 @@
 
 extern RsaKey global_key; 
 
-void set_key(big_int d);
-
+void set_global_key(RsaKey rsa_key);
 
 #endif
