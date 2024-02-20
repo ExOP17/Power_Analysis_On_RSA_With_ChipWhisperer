@@ -1,13 +1,21 @@
 #include "../utils/utils.h"
-#include "../utils/key.h"
-
+#include "../utils/global_variable.h"
+#include <inttypes.h>
 // extern RsaKey global_key;
 // extern SecretData global_sd;
 
-uint8_t your_function(uint8_t * pt, uint8_t len)
+uint8_t cmd_encrypt(uint8_t * pt, uint8_t len)
 {
+    trigger_high();
+    big_int res = encrypt(global_sd.pt, global_key.e, global_key.n);
+
+	uint8_t d_as_bytes[64] = {0};
+    sprintf(d_as_bytes, "ct=%lu", res);
+
+    set_global_sd_ct(res);
+   	simpleserial_put('r', 64, d_as_bytes);
+    trigger_low();
 
 	// https://chipwhisperer.readthedocs.io/en/latest/simpleserial.html
-
     return 0;
 }

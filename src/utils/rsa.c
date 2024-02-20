@@ -1,5 +1,5 @@
 #include "utils.h"
-#include "key.h"
+#include "global_variable.h"
 
 // extern RsaKey global_key;
 // extern SecretData global_sd;

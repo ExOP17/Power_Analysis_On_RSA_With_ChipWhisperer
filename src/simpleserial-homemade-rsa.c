@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "utils/key.h"
+#include "utils/global_variable.h"
 
 
 // RsaKey global_key = {0};
@@ -48,10 +48,10 @@ int main(void)
 
     simpleserial_addcmd('g', 0, gen_key);
     simpleserial_addcmd('d', 0, get_d);
+    simpleserial_addcmd('e', 0, cmd_encrypt);
     // simpleserial_addcmd('s', 16, set_key);
     // simpleserial_addcmd('p', 16, get_pt);
 
-    // simpleserial_addcmd('e', 16, TODO);
 
     // look for simpleserial packets
     while(1)
