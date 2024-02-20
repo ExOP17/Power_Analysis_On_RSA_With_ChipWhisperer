@@ -1,5 +1,5 @@
 #include "utils.h"
-#include "key.h"
+#include "global_variable.h"
 
 // extern RsaKey global_key;
 // extern SecretData global_sd;
@@ -18,20 +18,36 @@ big_int bytes_to_big_int(int n, uint8_t* v)
 
 big_int poow(big_int base, big_int exposant, big_int modulus)
 { 
-    base %= modulus;
-    exposant %= modulus;
-
+    // base %= modulus;
+    big_int inutilus = 0xabcd;
     big_int res = 1;
+    // exposant %= modulus;
+
 
     while(exposant > 0)
     {
         if(exposant & 1)
         {
             res = (res * base) % modulus;
+
+            inutilus = inutilus * 17 + 1;
+            inutilus = inutilus * 17 + 1;
+            inutilus = inutilus * 17 + 1;
+            inutilus = inutilus * 17 + 1;
+            // inutilus = inutilus * 17 + 1;
+            // inutilus = inutilus * 17 + 1;
+            // inutilus = inutilus * 17 + 1;
+            // inutilus = inutilus * 17 + 1;
+            // inutilus = inutilus * 17 + 1;
+            // inutilus = inutilus * 17 + 1;
+            // inutilus = inutilus * 17 + 1;
+            // inutilus = inutilus * 17 + 1;
+            // inutilus = inutilus * 17 + 1;
         }
         
         base = (base * base) % modulus;
         exposant >>= 1;
+        // break;
     }
     
     return res;
