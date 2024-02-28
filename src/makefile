@@ -6,6 +6,7 @@ SRC += utils/math.c
 SRC += utils/rsa.c
 SRC += utils/global_variable.c
 SRC += commands/encrypt.c
+SRC += commands/decrypt.c
 SRC += commands/gen_key.c
 SRC += commands/get_d.c
 # SRC += utils/*.c
