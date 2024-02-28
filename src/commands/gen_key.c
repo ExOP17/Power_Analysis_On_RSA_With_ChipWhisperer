@@ -30,7 +30,7 @@ uint8_t gen_key(uint8_t * pt, uint8_t len)
     
     // set_key()
 
-    RsaKey temp = {n, (big_int)0b10000110011110011, d, p, q, phi};
+    RsaKey temp = {n, (big_int)0b10000000011110000, d, p, q, phi};
     set_global_key(temp);
     set_global_sd_pt((big_int)0b10000000011110000);
 
