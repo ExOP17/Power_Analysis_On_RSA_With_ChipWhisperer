@@ -21,6 +21,7 @@ big_int poow(big_int base, big_int exposant, big_int modulus)
     // base %= modulus;
     big_int inutilus = 0xabcd;
     big_int res = 1;
+    trigger_high();
     // exposant %= modulus;
 
 
@@ -30,25 +31,16 @@ big_int poow(big_int base, big_int exposant, big_int modulus)
         {
             res = (res * base) % modulus;
 
-            inutilus = inutilus * 17 + 1;
-            inutilus = inutilus * 17 + 1;
-            inutilus = inutilus * 17 + 1;
-            inutilus = inutilus * 17 + 1;
-            // inutilus = inutilus * 17 + 1;
-            // inutilus = inutilus * 17 + 1;
-            // inutilus = inutilus * 17 + 1;
-            // inutilus = inutilus * 17 + 1;
-            // inutilus = inutilus * 17 + 1;
-            // inutilus = inutilus * 17 + 1;
-            // inutilus = inutilus * 17 + 1;
-            // inutilus = inutilus * 17 + 1;
-            // inutilus = inutilus * 17 + 1;
+            inutilus = base * exposant + 1;
+            // inutilus = inutilus * exposant + 1;
+            // inutilus = exposant * exposant + 1;
+            // inutilus = base * exposant + 1;
         }
         
         base = (base * base) % modulus;
         exposant >>= 1;
-        // break;
     }
+    trigger_low();
     
     return res;
 }

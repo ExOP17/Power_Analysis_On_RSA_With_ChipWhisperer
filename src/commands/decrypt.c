@@ -6,9 +6,11 @@
 
 uint8_t cmd_decrypt(uint8_t * pt, uint8_t len)
 {
-    trigger_high();
+    // trigger_high();
+    // int a = 2 + 30000000000;
+    // int b = 2 * a;
+    // trigger_low();
     big_int res = decrypt(global_sd.ct, global_key.d, global_key.n);
-    trigger_low();
 
 	uint8_t d_as_bytes[64] = {0};
     sprintf(d_as_bytes, "pt=%lu", res);

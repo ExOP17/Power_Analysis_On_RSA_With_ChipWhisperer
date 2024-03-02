@@ -16,7 +16,7 @@ SS_VER = SS_VER_1_1
 # No crypto required
 CRYPTO_TARGET = NONE
 # Choosing platform
-PLATFORM = CW303
+PLATFORM = CW308_STM32F0
 
 # Path of the firmware folder
 # You need to change this variable according to your firmware path
