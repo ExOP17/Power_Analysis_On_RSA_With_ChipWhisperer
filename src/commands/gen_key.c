@@ -31,7 +31,8 @@ uint8_t gen_key(uint8_t * pt, uint8_t len)
     // set_key()
 
     // 0b11111111111111
-    RsaKey temp = {269911717, (big_int)0b11111111111111, 173278623, 16411, 16447, 269878860};
+    // struct RsaKey : n, e, d, p, q, phi,;
+    RsaKey temp = {269911717, (big_int)0b, 173278623, 16411, 16447, 269878860};
     // RsaKey temp = {n, (big_int)0b11111111111111, d, p, q, phi};
     set_global_key(temp);
     set_global_sd_pt((big_int)0b111111111);

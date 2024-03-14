@@ -19,22 +19,25 @@ big_int bytes_to_big_int(int n, uint8_t* v)
 big_int poow(big_int base, big_int exposant, big_int modulus)
 { 
     // base %= modulus;
-    big_int inutilus = 0xabcd;
+    big_int inutilus = 0xab;
     big_int res = 1;
     trigger_high();
     // exposant %= modulus;
 
-
+    // return;
     while(exposant > 0)
     {
         if(exposant & 1)
         {
             res = (res * base) % modulus;
 
-            inutilus = base * exposant + 1;
+            inutilus = inutilus * 17 + 1;
+            inutilus = inutilus * 17 + 1;
+            inutilus = inutilus * 17 + 1;
+            // inutilus = inutilus * 17 + 1;
+            // inutilus = exposant * exposant + 1;
             // inutilus = inutilus * exposant + 1;
             // inutilus = exposant * exposant + 1;
-            // inutilus = base * exposant + 1;
         }
         
         base = (base * base) % modulus;
@@ -42,7 +45,9 @@ big_int poow(big_int base, big_int exposant, big_int modulus)
     }
     trigger_low();
     
-    return res;
+    // set_global_bs(base);
+    // set_global_bs(exposant);
+    return inutilus;
 }
 
 big_int inverse_mod(big_int a, big_int n)

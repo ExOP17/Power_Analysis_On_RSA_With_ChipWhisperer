@@ -3,6 +3,7 @@
 
 RsaKey global_key = {0};
 SecretData global_sd = {0};
+big_int global_bs = 0;
 
 void set_global_key(RsaKey rsa_key)
 {
@@ -30,5 +31,10 @@ void set_global_sd_pt(big_int pt)
 void set_global_sd_ct(big_int ct)
 {
 	global_sd.ct = ct;
-}	
+}
+
+void set_global_bs(big_int bs)
+{
+	global_bs = bs;
+}
 

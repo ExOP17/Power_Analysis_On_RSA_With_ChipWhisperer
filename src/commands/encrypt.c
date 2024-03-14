@@ -13,7 +13,7 @@ uint8_t cmd_encrypt(uint8_t * pt, uint8_t len)
 	uint8_t d_as_bytes[64] = {0};
     sprintf(d_as_bytes, "ct=%lu;e=%lu", res, global_key.e);
 
-    set_global_sd_ct(res);
+    // set_global_sd_ct(res);
    	simpleserial_put('r', 64, d_as_bytes);
 
 	// https://chipwhisperer.readthedocs.io/en/latest/simpleserial.html

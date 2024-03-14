@@ -42,7 +42,7 @@ int main(void)
     We need to trigger the capture trace to retrieve `d`
 
         4. `get_d` : (big_int c) 
-    Send `d` to the computer
+    Send `d` to the computer (currently, this return the full key struct, for debug purpose)
     */
     // simpleserial_addcmd('p', 16, get_pt);
 
