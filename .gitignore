@@ -12,3 +12,4 @@ src/simpleserial-homemade-rsa-*
 src/prog
 jupyter/.ipynb_checkpoints/
 tests
+src/automize
