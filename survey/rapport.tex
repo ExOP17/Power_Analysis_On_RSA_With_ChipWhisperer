@@ -3,6 +3,14 @@
 
 % Import du template
 \usepackage{template_cr}
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\addbibresource{sample.bib} %Imports bibliography file
+
 \usepackage[ruled,vlined]{algorithm2e}
 
 % Définition des variables d'environnement
@@ -16,6 +24,9 @@
 % Retirons les indentations des paragraphes
 \setlength{\parindent}{0pt}
 
+% \addbibresource{sample.bib} %Imports bibliography file
+
+
 % Commande de compilation : 
 % pdflatex -shell-escape rapport.tex ; pdflatex -shell-escape rapport.tex
 \begin{document}
@@ -27,17 +38,26 @@
 
 \section*{Introduction}
 \addcontentsline{toc}{section}{Introduction}
+coucouc c l'intro
+% \section{Contexte du projet}
+% \input{sections/1_contexte_du_projet}
 
-\section{Contexte du projet}
-\input{sections/1_contexte_du_projet}
-
-\section{Implémentation du RSA}
-\input{sections/2_implémentation_du_rsa}
-
+% \section{Implémentation du RSA}
+% \input{sections/2_implémentation_du_rsa}
+Using \texttt{biblatex} you can display a bibliography divided into sections, depending on citation type. 
+Let's cite! Einstein's journal paper \cite{einstein} and Dirac's book \cite{dirac} are physics-related items. 
+Next, \textit{The \LaTeX\ Companion} book \cite{latexcompanion}, Donald Knuth's website \cite{knuthwebsite}, \textit{The Comprehensive Tex Archive Network} (CTAN) \cite{ctan} are \LaTeX-related items; but the others, Donald Knuth's items, \cite{knuth-fa,knuth-acp} are dedicated to programming. 
 \section{Attaque}
-\input{sections/3_attaque}
+% \input{sections/3_attaque}
+\cite{ctan}
 
-\section*{Conclusion}
-\addcontentsline{toc}{section}{Conclusion}
+% \section*{Conclusion}
+% \addcontentsline{toc}{section}{Conclusion}
+% accaca
+% bibliography
+\medskip
+\printbibliography[title={Whole bibliography}]
+% \printbibliography %Prints the entire bibliography with the title "Whole bibliography"
+
 
 \end{document}
