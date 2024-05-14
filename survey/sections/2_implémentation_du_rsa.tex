@@ -58,7 +58,7 @@ Nous pouvons voir que pour le premier algorithme, celui d'exponentiation rapide 
     \caption{Comparaison des complexités des deux algorithmes d'exponentiation}
     \label{fig:diff_complexite}
 \end{figure}
-Il est aussi important de relever que la présence de l'algorithme d'exponentation rapide n'est pas un hasard, c'est grâce à lui que le système est faillible. En effet, si il rencontre un $1$ dans la représentation binaire du nombre il fait 2 calculs, sinon, il en fait 1 seul. Grâce à ça, il a une fuite de la clé qui s’opèrera sur la trace de consommation électrique.
+Il est aussi important de relever que la présence de l'algorithme d’exponentiation rapide n'est pas un hasard, c'est grâce à lui que le système est faillible. En effet, si il rencontre un $1$ dans la représentation binaire du nombre il fait 2 calculs, sinon, il en fait 1 seul. Grâce à ça, il a une fuite de la clé qui s’opèrera sur la trace de consommation électrique.
 
 Notre implémentation en C de ces deux algorithmes se trouve dans l'archive final du projet. Une fois ces primitives implémentées, il a été facile d'implémenter la génération de clé, le chiffrement et le déchiffrement, vous pouvez également retrouver ces implémentations en C dans l'archive final du projet.
 
@@ -72,6 +72,25 @@ est de $3072$ bits.
   \item Les exposants secrets doivent être de même taille que le module.
   \item Pour les applications de chiffrement, les exposants publics doivent être strictement supérieurs à $2^{16} = 65536$.
 \end{enumerate}
-Afin d'attaquer une version du RSA qui pourrait être utilisé dans un cadre réel, nous allons donc devoir l'implémenter avec un module, notée $n$ précédemment, de 2048 bits ! Or, comme vu précédemment nous allons utiliser une machine en 32 bits, ce qui signifie que les types de bases sur lesquels les opérations élémentaires sont implémentées, ne dépasse pas 32 bits. Nous allons devoir créer et implémenter des opérations sur les grands nombres 
+Afin d'attaquer une version du RSA qui pourrait être utilisé dans un cadre réel, nous allons donc devoir l'implémenter avec un module, notée $n$ précédemment, de 2048 bits ! Or, comme vu précédemment nous allons utiliser une machine en 32 bits, ce qui signifie que les types de bases sur lesquels les opérations élémentaires sont implémentées, ne dépasse pas 32 bits. Nous allons devoir créer et implémenter des opérations sur les grands nombres, nous appellerons BigInt ces derniers dans le reste du rapport car c'est l'usage.
+
 \subsection{Implémentation du big int}
+Pour représenter un grand entier dans un système embarqué 32 bits, nous utilisons un découpage en chunks de 16 bits. Imaginons que nous souhaitons un nombre de 64 bits. Nous divisons cet entier en mots de 16 bits. Ainsi, chaque chunk de 16 bits contient une partie du grand entier.\\
+
+Prenons un exemple concret : supposons que notre grand entier soit \texttt{0xABCD1234567890EF}. Pour le découper en chunks de 16 bits, nous aurons :
+
+\begin{itemize}
+\item Chunk 1: \texttt{0xABCD}
+\item Chunk 2: \texttt{0x1234}
+\item Chunk 3: \texttt{0x5678}
+\item Chunk 4: \texttt{0x90EF}
+\end{itemize}
+
+Chaque chunk peut être représenté par un entier de 16 bits dans la mémoire du système embarqué. En utilisant cette méthode de découpage, nous pouvons stocker et manipuler des grands entiers même dans des systèmes avec des limitations de taille de données.\\
+
+Si nous utilisons des sous-entiers de 16 bits et pas de 32 bits c'est parce que le 32 bits servira de type d'overflow, en effet lorsqu'on aura une sous opération qui dépassera la taille d'un chunk alors un entier de 32 bits permettra de résoudre ce problème.\\
+
+Sachant que chaque chunk est sur $16$ bits c'est comme si nous avons une représentation du nombre en base $2^{16}$, nous n'avons ``plus'' qu'a considéré un chunk comme un symbole de la base $2^{16}$ et implémenté les opérations usuelles dessus.\\
+
+Cette méthode fonctionne pour l'addition et la soustraction, mais pour les opérations d'inverse modulaire, de multiplication modulaire et de division, cela ne fonctionne plus et il faut utiliser des algorithmes plus poussés, nous nous sommes basé sur ceux du livre ``Handbook of Applied Cryptography'' \cite{hac:ch14}.
 \subsection{Conclusion}
