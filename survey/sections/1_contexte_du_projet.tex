@@ -29,7 +29,7 @@ Soit un message représenté par un entier naturel M strictement inférieur à n
 Nous avons la relation suivante:
 \begin{equation}
 \label{eq:chiffrement}
-C \equiv M^e \pmod{n}
+c \equiv m^e [n]
 \end{equation}
 Ainsi pour chiffrer un message M on utilise une fonction d'exponentiation modulaire utilisant la clé publique.
 \\
@@ -41,13 +41,13 @@ Nous pouvons de la même manière déchiffrer le message chiffré à l'aide de l
 Nous avons ainsi la relation suivante :
 \begin{equation}
 \label{eq:dechiffrement}
-M \equiv C^d \pmod{n}
+m \equiv c^d [n]
 \end{equation}
 
 
 Ainsi nous remarquons que la base du chiffrement et du déchiffrement repose sur une exponentiation modulaire. Le problème de l'exponentiation utilisé par le RSA est qu'elle ne peut pas être naïve, c'est à dire qu'on ne peut pas faire $ x^n = x*x*x...*x$ n fois. En effet, le RSA utilise des nombres de 2048 bits ce qui rend impossible l'utilisation d'un algorithme naïf.
 Nous verrons par la suite lors de l'implémentation du RSA qu'on peut utiliser l'algorithme d'exponentiation rapide pour des nombres de 2048 bits.
-\newpage
+% \newpage
 \subsection{Attaques par canaux auxiliaires}
 Il est désormais temps de vous introduire au concept d'attaque par canaux auxiliaires.
 Selon Wikipedia une attaque par canaux auxiliaires est une:
