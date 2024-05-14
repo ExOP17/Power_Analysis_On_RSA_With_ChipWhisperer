@@ -1,41 +1,34 @@
 \subsection{Introduction}
-Dans cette partie nous allons voir comment l'attaque par analyse de consomation a été mise en place, c'est à dire comment fonctionne notre kit chipwhisperer et ce que nous avons fait dessu. Ceci comprend l'explication des firmwares, l'obtention et l'analyses des résultats obetnus.
-\subsection{Présentation de la Chip Whisperer}
-Le kit Chip Whisperer est composée de :
+Dans cette partie nous allons voir comment l'attaque par analyse de consommation a été mise en place, c'est à dire comment fonctionne notre kit ChipWhisperer et ce que nous avons fait dessus. Ceci comprend l'explication des firmwares, l'obtention et l'analyses des résultats obtenus.
 
-\begin{itemize}
-\item Carte d'acquisition : Comprend les sondes et les amplificateurs nécessaires pour mesurer la consommation de puissance ou les signaux électromagnétiques.
-\item Carte cible : Une carte cible sur laquelle se trouve le microcontrôleur ou le dispositif à tester.
-\item Carte "mère": carte qui permet de de recevoir la carte cible et d'envoyer les signaux à la carte d'acquisition
-\end{itemize}
+\subsection{Installation de la ChipWhisperer (CW)}
+Tout d'abord, nous avons pris en main le matériel, nous avons donc découvert les différentes cartes qui étaient à notre disposition dans le kit fournit.
+Deuxièmement, nous avons branché physiquement la carte d'acquisition à un ordinateur via un port USB, c'est cette carte qui nous enverra la consommation de notre cible.
 
-\subsection{Installation de la Chip Whisperer (CW)}
-Tout d'abord, nous avons pris en main le matériel, nous avons donc découvert les différentes cartes qui étaients à notre disposition dans le kit fournis.
-Deuxièment, nous avons branchés physiquement la carte d'acquisition à un ordinateur via un port USB, c'est cette carte qui nous enverra la consomation de notre cible.
+Nous nous sommes ensuite penché sur la connexion avec un ordinateur, afin de pouvoir communiquer avec la ChipWhisperer. Nous avons du chercher longuement afin de trouver comment nous connecter à cette carte via l'ordinateur. Pour ce faire, nous avons principalement consulté le wiki ChipWhisperer et d'autres forums afin de trouver une solution. 
+Nous avons donc commencé par installer les différents packages nécessaires pour utiliser la carte. Cette partie fut compliqué car le guide d'installation de la ChipWhisperer n'expliquait pas la marche à suivre pour nos OS respectifs. Cependant il était écrit qu'il était tout de même possible d'installer les paquets nécessaires au fonctionnement de la carte. Il a ainsi fallut installer chaque paquets un par un en trouvant le bon paquet disponible sur nos distributions. 
 
+Ensuite nous avons installé JupyterNotebook, qui est un outil simple et accessible pour visualiser et organiser notre connexion et notre communication avec la carte. 
+Il nous permettais de lancer chaque commande séparément et d'avoir le retour de la carte en conséquence.
+Nous devions aussi utiliser un environnement python spécifique à l'aide de "pyenv" pour que notre JupyterNotebook fonctionne correctement.
 
-Nous nous sommes ensuite penché sur la connexion avec un ordinateur, afin de pouvoir communiquer avec la Chip. Nous avons du chercher longement afin de trouver comment nous connecter à cette carte via l'ordinateur. Pour ce faire, nous avons principalement consulté le wiki chipwhisperer et d'autres forums afin de trouver une solution. 
-Nous avons donc commencer par installer les différents packages nécessaires pour utiliser la carte. 
-"import chipwhisperer as cw"
-
-Ensuite nous avons installer Jupyter Notebook, qui est un outil simple et accessible pour visualiser et organiser notre connexion et notre communication avec la carte. 
-Il nous permetais de lancer chaque commande séparément et d'avoir le retour de la carte en conséquence.
-Nous devions aussi nous mettre sous un environement python "pyenv" pour que notre jupyter fonctionne.
-\subsection{Fonctionnement de la Chip Whisperer (CW)}
-Lorsque la carte a été connectée avec succés, nous avons eu besoin de connaitre les différentes commandes associés à cette carte afin de faire ce que nous voulions dessus.
+\subsection{Fonctionnement de la ChipWhisperer (CW)}
+Lorsque la carte a été connectée avec sucés, nous avons eu besoin de connaitre les différentes commandes associés à cette carte afin de faire ce que nous voulions dessus.
 Nous nous donc reportés au wiki de cette section qui est : http://wiki.newae.com/SimpleSerial .
 La carte communique donc en SimpleSerial, le protocole de communication utilisé pour presque tous les démonstrations de ChipWhisperer.
 \icon{Capture_commandes_SimpleSerial.png}
 
 \subsection{Introduction avec un firmware déjà fait}
 Maintenant que nous pouvons communiquer avec notre carte, et que nous possèdons les commandes associés à ce firmware, nous avons pu tester les attaques pré-enregistrées dans la carte. 
-Nous avons donc tester une attaque classique sur le RSA, grace aux commandes suivantes: 
+Nous avons donc testé une attaque classique sur le RSA, grace aux commandes suivantes: 
 On va chercher le bon firmware qui correspond à une attaque sur le RSA et on identifie le type de carte cible qui est connecté physiquement.
 hardware\victims\firmware\simpleserial-rsa
 make PLATFORM=CW303
-Ensuite, nous effectuons une commande qui permet de définir une commande dans ce firmware. Faire 't' va donc appeler la fonction real_dec (Vrai déchiffrage)
-
+Ensuite, nous utilisons une fonction qui permet de définir une commande dans ce firmware. 
 simpleserial_addcmd('t', 0,  real_dec);
+Envoyer la lettre 't' depuis l'odinateur va donc appeler la fonction real_dec (Vrai déchiffrement).
+
+
 
 Avec ces commandes, nous avons donc eu des traces de consomations qui nous permetais de retrouver la clé privée qui a été utilisée lors de ce chiffrement RSA.
 \subsection{Conception de notre firmware}
