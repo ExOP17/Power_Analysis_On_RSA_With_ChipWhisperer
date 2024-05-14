@@ -10,6 +10,7 @@
 #include <string.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <gmp.h>
 
 uint64_t d = 3;
 uint64_t n = 0x61d9abf2;
@@ -28,6 +29,7 @@ uint8_t rsa_decrypt(uint8_t * pt, uint8_t len) {
 
     uint64_t res = 1;
     uint64_t base = c;
+    mpz_t a;
     uint64_t exp = d;
     uint16_t dummy = 0xabcd;
 

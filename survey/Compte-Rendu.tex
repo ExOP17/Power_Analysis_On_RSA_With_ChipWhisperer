@@ -76,38 +76,38 @@
 % \end{figure}
 
 % Contenu du TP
-\section{ChipWhisperer}
-\subsection{ChipWhisperer's purpose}
-ChipWhisperer is used to make power analysis attacks easy by making a confined environment that we can analyze. It also provides a lot of crypto-firmware that we can attack with some side channel attack's tutorials.
-\subsection{ChipWhisperer's components }
+% \section{ChipWhisperer}
+% \subsection{ChipWhisperer's purpose}
+% ChipWhisperer is used to make power analysis attacks easy by making a confined environment that we can analyze. It also provides a lot of crypto-firmware that we can attack with some side channel attack's tutorials.
+% \subsection{ChipWhisperer's components }
 
-\noindent ChipWhisperer is made of 2 main components :
-\begin{itemize}
-\item{a capture board used to record the current consumption and make the interface between the computer and the crypto-processor}
-\item{a target board used to plug a target chip onto.The target board is useful to quickly switch from a target chip to another one} 
-\end{itemize}
+% \noindent ChipWhisperer is made of 2 main components :
+% \begin{itemize}
+% \item{a capture board used to record the current consumption and make the interface between the computer and the crypto-processor}
+% \item{a target board used to plug a target chip onto.The target board is useful to quickly switch from a target chip to another one} 
+% \end{itemize}
 
-The target chip is the place where the firmware we want to analyze is running. This chip is only running our firmware so we don't have electrical noise on the analysis. The capture board is used to send the request to the target device and receive the output of the firmware, this board also record the current consumption of the target device. By slicing the work of a computer with two boards, the ChipWhisperer tool allow us to run our firmware in a confined space.
+% The target chip is the place where the firmware we want to analyze is running. This chip is only running our firmware so we don't have electrical noise on the analysis. The capture board is used to send the request to the target device and receive the output of the firmware, this board also record the current consumption of the target device. By slicing the work of a computer with two boards, the ChipWhisperer tool allow us to run our firmware in a confined space.
 
-\pagebreak
-\section{First attack on RSA}
-For our first side channel attack on RSA we used an open source firmware and notebook found on github.
-This firmware use the square and multiply algorithm so the attack was based on it.
-Theses opensource files helped us to understand the using of simpleserial, a Chipwhisperer's library.
-Finally we got the following output from the capture-board.
+% \pagebreak
+% \section{First attack on RSA}
+% For our first side channel attack on RSA we used an open source firmware and notebook found on github.
+% This firmware use the square and multiply algorithm so the attack was based on it.
+% Theses opensource files helped us to understand the using of simpleserial, a Chipwhisperer's library.
+% Finally we got the following output from the capture-board.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.7\textwidth]{../assets/img/first_attack.png}
-  \caption{Currant consumption of the target}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width=0.7\textwidth]{../assets/img/first_attack.png}
+%   \caption{Currant consumption of the target}
+% \end{figure}
 
-As we can see for every bit of the private key we can retrieve to correct value.
+% As we can see for every bit of the private key we can retrieve to correct value.
 
 
-\section{Building our own Firmware}
-\subsection{Communication between the computer and the ChipWhisperer}
-To send the information from the computer to the ChipWhisperer, we use the "simpleserial.h" librairy.
+% \section{Building our own Firmware}
+% \subsection{Communication between the computer and the ChipWhisperer}
+% To send the information from the computer to the ChipWhisperer, we use the "simpleserial.h" librairy.
 
 % Votre discussion ici...
 \section{Contexte du projet}

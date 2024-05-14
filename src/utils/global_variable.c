@@ -7,15 +7,21 @@ big_int global_bs = 0;
 
 void set_global_key(RsaKey rsa_key)
 {
-	// global_key.n = rsa_key.n;
-	// global_key.e = rsa_key.e;
-	// global_key.d = rsa_key.d;
-	// global_key.d = rsa_key.d;
-	// global_key.p = rsa_key.p;
-	// global_key.q = rsa_key.q;
-	// global_key.phi = rsa_key.phi;
 
 	global_key = rsa_key;
+}
+
+void set_global_e(big_int e)
+{
+	global_key = (RsaKey){
+		global_key.n,
+		e,
+		global_key.d,
+		global_key.d,
+		global_key.p,
+		global_key.q,
+		global_key.phi
+	};
 }
 
 void set_global_sd(SecretData sd)

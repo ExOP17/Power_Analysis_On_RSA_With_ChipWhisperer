@@ -11,6 +11,7 @@ void set_global_key(RsaKey rsa_key);
 void set_global_sd(SecretData sd);
 void set_global_sd_pt(big_int pt);
 void set_global_sd_ct(big_int ct);
+void set_global_e(big_int e);
 
 
 

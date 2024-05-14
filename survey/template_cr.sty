@@ -1,0 +1,98 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cr_ensibs}[31/10/2023 V1.0 CR ENSIBS]
+
+% Import de package en vrac
+\RequirePackage[french]{babel}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[top=2cm, left=2cm]{geometry}
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{fullpage}
+\RequirePackage{minted}
+\RequirePackage{fvextra}
+\RequirePackage{amsthm}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{mdframed}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{fancyhdr}
+\RequirePackage{lastpage}
+\RequirePackage{mdframed}
+
+% Stylisation des pieds de page
+\pagestyle{fancy}
+\fancyhf{}
+\fancypagestyle{plain}{\fancyfoot[C]{\thepage/\pageref*{LastPage}}}
+\fancyfoot[C]{\thepage/\pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+
+% Définition des couleurs - Catpuccin Latte based
+\definecolor{codebg}{HTML}{303446}			  % Couleur de fond du code
+\definecolor{linenumber}{HTML}{838ba7}		% Couleur des numéros de ligne pour du code
+\definecolor{rouge}{HTML}{d20f39}
+\definecolor{vert}{HTML}{40a02b}
+\definecolor{bleu}{HTML}{04a5e5}
+\definecolor{orange}{HTML}{fe640b}
+\definecolor{lavande}{HTML}{7287fd}
+
+% Coloration syntaxique de code
+\renewcommand{\theFancyVerbLine}{\textcolor{linenumber}{\footnotesize\texttt{\arabic{FancyVerbLine}}}}
+\setminted{
+  bgcolor=codebg,
+  linenos,
+  numbersep=1pt,
+  breaklines,
+  xleftmargin=15pt,
+  style=nord
+}
+
+% Page de garde
+\renewcommand{\maketitle}
+{
+  \begin{titlepage}
+  \paragraph{\vspace{0.3\textheight}}
+  \begin{center}
+  \thispagestyle{empty}
+  \Large{\textsc{Parcours École Ingénieur -- 2\textsuperscript{ème} année}}
+  \vspace{-10pt}
+  \vspace{-10pt}
+  \rule{\textwidth}{1pt}
+  \huge{\textbf{PRJ 1401 -- Rapport final}} \\
+  \vspace{10pt}
+  \Large{\emph{Attaque par cannaux auxiliaires : Cryptanalyse du système RSA}} \\
+  \vspace{10pt}
+  \small{\Date}
+  \rule{\textwidth}{1pt}
+  \vspace{35pt}
+  \normalsize{Par \Author} \\
+  \vspace{35pt}
+  \begin{figure}[b]
+    \center
+    \includegraphics[width=0.35\textwidth]{fig/logo}
+  \end{figure}
+  \end{center}  
+  \end{titlepage}
+  \pagebreak
+}
+
+% Commande liseret
+  % Usage : couleur obligatoire
+    % Avec titre : \liseret{couleur}{titre}
+    % Sans titre : \liseret{couleur}{}
+\newenvironment{liseret}[2]{%
+  \begin{mdframed}[
+    linecolor=#1,              
+    linewidth=2.5pt,           
+    leftline=true,             
+    rightline=false,
+    topline=false,             
+    bottomline=false,          
+    backgroundcolor=#1!20,
+    frametitle={#2}       
+  ]
+}{
+  \end{mdframed}
+}
+
+% Création de la page de garde

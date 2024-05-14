@@ -11,6 +11,7 @@
 #include <stdint.h> 
 #include <stdlib.h>
 #include <math.h>
+#include "gmp-6.3.0/gmp.h"
 
 #include "utils/global_variable.h"
 
@@ -50,9 +51,9 @@ int main(void)
     simpleserial_addcmd('a', 0, get_d);
     simpleserial_addcmd('e', 0, cmd_encrypt);
     simpleserial_addcmd('d', 0, cmd_decrypt);
+    simpleserial_addcmd('s', 8, cmd_set_e);
     // simpleserial_addcmd('s', 16, set_key);
     // simpleserial_addcmd('p', 16, get_pt);
-
 
     // look for simpleserial packets
     while(1)

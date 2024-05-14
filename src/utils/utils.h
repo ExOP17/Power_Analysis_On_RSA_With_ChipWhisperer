@@ -47,6 +47,7 @@ big_int encrypt(big_int m, big_int e, big_int N); // c = m^e mod N
 big_int decrypt(big_int c, big_int d, big_int N); // m = c^d mod N
 void swap(big_int *a, big_int *b); // Swapping two variables
 big_int gcd(big_int a, big_int b);
+uint8_t cmd_set_e(uint8_t * pt, uint8_t len);
 
 uint8_t gen_key(uint8_t * pt, uint8_t len);
 uint8_t get_d(uint8_t * pt, uint8_t len);

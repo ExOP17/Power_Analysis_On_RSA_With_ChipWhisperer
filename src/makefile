@@ -9,7 +9,8 @@ SRC += commands/encrypt.c
 SRC += commands/decrypt.c
 SRC += commands/gen_key.c
 SRC += commands/get_d.c
-# SRC += utils/*.c
+SRC += commands/set_e.c
+SRC += 
 # SRC += commands/*.c
 # Use simpleserial 1
 SS_VER = SS_VER_1_1

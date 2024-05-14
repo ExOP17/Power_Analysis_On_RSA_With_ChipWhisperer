@@ -1,0 +1,42 @@
+% Définitions de la class
+\documentclass[12pt]{article}
+
+% Import du template
+\usepackage{template_cr}
+
+% Définition des variables d'environnement
+\makeatletter
+	\title{TP 3 - Programmation Réseau}	\let\Title\@title
+	\author{Etienne RICHARD, Matthieu CIZDZIEL et Mathis MOGUEDET} \let\Author\@author
+	\date{\today}           	\let\Date\@date
+	\newcommand{\UE}{Attaque par cannaux auxiliaires : Cryptanalyse du système RSA}
+\makeatother
+
+% Retirons les indentations des paragraphes
+\setlength{\parindent}{0pt}
+
+% Commande de compilation : 
+% pdflatex -shell-escape rapport.tex ; pdflatex -shell-escape rapport.tex
+\begin{document}
+\maketitle
+\pagebreak
+
+\tableofcontents
+\pagebreak
+
+\section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
+
+\section{Contexte du projet}
+\input{sections/1_contexte_du_projet}
+
+\section{Implémentation du RSA}
+\input{sections/2_implémentation_du_rsa}
+
+\section{Attaque}
+\input{sections/3_attaque}
+
+\section*{Conclusion}
+\addcontentsline{toc}{section}{Conclusion}
+
+\end{document}
