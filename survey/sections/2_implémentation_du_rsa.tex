@@ -9,7 +9,7 @@ Comme nous l'avons vu dans la section précédente, pour implémenter le RSA, no
 	\item Chiffrer un message $m$, sur 32 bits $m < 2^{32}$;
 	\item Déchiffrer un chiffré $c$, sur 32 bits $c < 2^{32}$.
 \end{enumerate}
-
+\medskip
 Les algorithmes nécessaire pour effectuer ces opérations sont : la génération de nombres premiers aléatoire afin de déterminer $p$ et $q$, le calcul d'inverse modulaire pour déterminer la clé privée $d$ tel que $ed \equiv 1 [n]$ et l'exponentiation modulaire afin de chiffrer et déchiffrer, cf. équation (\ref{eq:chiffrement}) et (\ref{eq:dechiffrement}).\\
 
 Nous avons écrit le pseudo-code des ces deux algorithmes essentiels (cf. Algorithme \ref{alg:expomod} et \ref{alg:invmod}), pour ce qui est de leur implémentation en C dans le firmware de la ChipWhisperer, vous pouvez les retrouver dans l'archive finale du projet.
@@ -61,16 +61,17 @@ $x \leftarrow 1$\;
 \label{alg:invmod}
 \end{algorithm}
 
+Afin d'illustrer la différence de complexité entre les deux algorithmes d'exponentiation binaire : le naif et le rapide, vous pouvez retrouver sur la Figure \ref{fig:diff_complexite} le graphe du nombres d'opération par rapport à l'exposant utilisé. On se rends compte que l'exponentiation rapide est bien plus efficace !
 % Nous pouvons voir que pour le premier algorithme, celui d'exponentiation rapide modulaire, nous utilisons un algorithme efficace contrairement à l'algorithme naïf qui consisterait a faire : $\underbrace{x \times x \times \ldots \times x}_{\text{n fois}}$. Afin de mettre en valeur la différence de complexité entre ces deux version, vous pouvez retrouver Figure \ref{fig:diff_complexite} la graphe représentant le nombre d'opération requis en fonction de l'exposant.
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=\textwidth]{fig/diff_complexite.png}
-%     \caption{Comparaison des complexités des deux algorithmes d'exponentiation}
-%     \label{fig:diff_complexite}
-% \end{figure}
-% Il est aussi important de relever que la présence de l'algorithme d’exponentiation rapide n'est pas un hasard, c'est grâce à lui que le système est faillible. En effet, si il rencontre un $1$ dans la représentation binaire du nombre il fait 2 calculs, sinon, il en fait 1 seul. Grâce à ça, il a une fuite de la clé qui s’opèrera sur la trace de consommation électrique.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{fig/diff_complexite.png}
+    \caption{Comparaison des complexités des deux algorithmes d'exponentiation}
+    \label{fig:diff_complexite}
+\end{figure}
+Il est aussi important de relever que la présence de l'algorithme d’exponentiation rapide n'est pas un hasard, c'est grâce à lui que le système est faillible. En effet, si il rencontre un $1$ dans la représentation binaire du nombre il fait 2 calculs, sinon, s'il rencontre un $0$, il en fait un seul. Grâce à ça, il a une fuite de la clé qui s’opèrera sur la trace de consommation électrique. On gagne en rapidité, mais attention, on fait fuir des données liée à la clé privée ...\\
 
-% Notre implémentation en C de ces deux algorithmes se trouve dans l'archive final du projet. Une fois ces primitives implémentées, il a été facile d'implémenter la génération de clé, le chiffrement et le déchiffrement, vous pouvez également retrouver ces implémentations en C dans l'archive final du projet.
+Une fois ces primitives implémentées, il a été facile d'implémenter la génération de clé, le chiffrement et le déchiffrement, vous pouvez également retrouver ces implémentations en C dans l'archive final du projet.
 
 \subsection{Objectif 2048 bits}
 D'après les recommandation de l'ANSSI \cite{anssi:guide}, un RSA implémenté avec les types de bases du C ($32$ bits), n'est pas du tout sécurisé. En effet, nous pouvons retrouver page 19 les règles suivantes :
