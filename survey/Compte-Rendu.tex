@@ -110,6 +110,35 @@ As we can see for every bit of the private key we can retrieve to correct value.
 To send the information from the computer to the ChipWhisperer, we use the "simpleserial.h" librairy.
 
 % Votre discussion ici...
+\section{Contexte du projet}
+\subsection{Introduction}
+En terme de sécurité informatique les méthodes de chiffrement sont très importantes notamment dans le domaine des télécommunication. La cryptographie est donc une notion très importante dans la cybersécurité actuelle. Les 3 principes de la cryptographie sont la confidentialité, l'authenticité et l'intégrité.
+La confidentialité assure que le contenu d'un message chiffré ne peut être lu que par son destinataire.
+L'authenticité assure l'origine du message, c'est à dire l'identité du messager.
+Enfin l'intégrité assure la non-modification d'un message.
+Dans notre cas nous mettrons en oeuvre des moyens pour s'attaquer à la confidentialité d'un protocole cryptographique. 
+Ainsi nous allons vous présenter un algorithme connu pour sa robustesse et utilisé dans le monde entier, le protocole RSA.
+\newpage
+\subsection{Généralités sur le RSA}
+Nous ne pouvons pas commencer la présentation du projet sans présenter le protocole RSA.
+Le protocole RSA utilise une clé publique pour chiffrer le message et une clé privé pour le déchiffrer. Les clés publique et privé n'étant pas les mêmes, on parle de chiffrement asymétrique.
+La robustesse du RSA repose dans la difficulté de factoriser un produit de deux grands nombres premiers.
+Sans rentrer dans le détail de sa robustesse nous allons vous expliquer son fonctionnement:
+
+
+\textbf{Génération des clés}
+Soit $p$ et $q$ deux nombres premiers distincts. On pose alors $n=pq$ et $\phi(n)=(p-1)(q-1)$.
+On choisit ensuite un nombre $e$ premier avec $\phi(n)$ et strictement inférieur à $\phi(n)$
+On peut enfin calculer $d$ l'inverse modulaire de $e$ modulo $\phi(n)$.
+Ainsi le couple (n,e) constitue la clé publique et $d$ la clé privée.
+
+
+\textbf{Chiffrement}
+Soit un message représenté par un entier naturel M strictement inférieur à n et C le message chiffré.
+Nous avons la relation suivante:
+\[
+C \equiv M^e \pmod{n}
+\]
 
 \section{Conclusion}
 % Votre conclusion ici...
