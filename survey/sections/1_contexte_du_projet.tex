@@ -11,41 +11,57 @@ Nous ne pouvons pas commencer la présentation du projet sans présenter le prot
 Le protocole RSA utilise une clé publique pour chiffrer le message et une clé privé pour le déchiffrer. Les clés publique et privé n'étant pas les mêmes, on parle de chiffrement asymétrique.
 La robustesse du RSA repose dans la difficulté de factoriser un produit de deux grands nombres premiers.
 Sans rentrer dans le détail de sa robustesse nous allons vous expliquer son fonctionnement:
-
+\\
 
 \textbf{Génération des clés}
+
+
 Soit $p$ et $q$ deux nombres premiers distincts. On pose alors $n=pq$ et $\phi(n)=(p-1)(q-1)$.
 On choisit ensuite un nombre $e$ premier avec $\phi(n)$ et strictement inférieur à $\phi(n)$
 On peut enfin calculer $d$ l'inverse modulaire de $e$ modulo $\phi(n)$.
 Ainsi le couple (n,e) constitue la clé publique et $d$ la clé privée.
-
+\\
 
 \textbf{Chiffrement}
+
+
 Soit un message représenté par un entier naturel M strictement inférieur à n et C le message chiffré.
 Nous avons la relation suivante:
 \[
 C \equiv M^e \pmod{n}
 \]
+Ainsi pour chiffrer un message M on utilise une fonction d'exponentiation modulaire utilisant la clé publique.
+\\
+
+\textbf{Déchiffrement}
+
+
+Nous pouvons de la même manière déchiffrer le message chiffré à l'aide de la clé privée. 
+Nous avons ainsi la relation suivante :
+\[
+M \equiv C^d \pmod{n}
+\]
+
 
 Ainsi nous remarquons que la base du chiffrement et du déchiffrement repose sur une exponentiation modulaire. Le problème de l'exponentiation utilisé par le RSA est qu'elle ne peut pas être naïve, c'est à dire qu'on ne peut pas faire $ x^n = x*x*x...*x$ n fois. En effet, le RSA utilise des nombres de 2048 bits ce qui rend impossible l'utilisation d'un algorithme naïf.
-Ainsi nous allons vous présenter l'algorithme d'exponentiation rapide.
-\subsection{L’exponentiation rapide}
-L'algorithme d’exponentiation rapide permet de réduire drastiquement le temps de calcul en basant le calcul sur la représentation binaire de l'exposant. Ainsi nous pouvons analyser l'algorithme suivant :
-% \begin{figure}[H]
-%   \centering
-%   \includegraphics[scale=1]{fig/algo_exp_rap.png}
-%   \caption{Algorithme d'exponentiation rapide}
-% \end{figure}
-Nous pouvons remarquer que l'algorithme fonctionne de manière séquentielle. Si l'exposant n est impair on effectue deux multiplication et une division. Si n pair on effectue une multiplication et une division. On appelle également cet algorithme "Square and Multiply" et on comprend aisément pourquoi.
-Il est important de noter qu'en binaire un nombre pair possède un bit de poids faible égal à 0 tandis qu'un nombre impaire possède un bit de poids faible égal à 1.
-Ainsi en parcourant l'exposant du bit de poids fort au bit de poids faible on utilise des opérations différentes en fonction du bit rencontré.
-De ce fait l’algorithme d’exponentiation rapide est de complexité $log_2(n)$ tandis que l'algorithme d'exponentiation naïve est de complexité n ce qui représente une sacrée différence sur des grand nombres.
-Nous le verrons par la suite mais cette implémentation du RSA avec l'algorithme d'exponentiation est sensible aux attaques par canaux auxiliaires.
+Nous verrons par la suite lors de l'implémentation du RSA qu'on peut utiliser l'algorithme d'exponentiation rapide pour des nombres de 2048 bits.
 \newpage
-\subsection{Attaques par canaux auxiliaire}
+\subsection{Attaques par canaux auxiliaires}
 Il est désormais temps de vous introduire au concept d'attaque par canaux auxiliaires.
 Selon Wikipedia une attaque par canaux auxiliaires est une:
 "Attaque informatique qui, sans remettre en cause la robustesse théorique des méthodes et procédures de sécurité, recherche et exploite des failles dans leur implémentation, logicielle ou matérielle."
 En reprenant ce que nous vous avons présenter précédemment nous ne remettons pas en compte la robustesse du protocole RSA mais son implémentation utilisant l'algorithme d’exponentiation rapide.
 Ainsi il existe une multitude d'attaques par canaux auxiliaires comme les attaques temporelles basées sur le temps mis par l'algorithme pour effectuer certaines opération, les attaques pas sondage qui consiste à analyser un circuit en y posant une sonde ou encore les attaques par consommation de courant.
-Dans notre cas nous allons nous intéresser aux attaques par consommation de courant.
+Dans notre cas nous allons nous intéresser aux attaques par consommation de courant. Ces attaques sont basées sur le fait que chaque type d'opération que peut effectuer le processeur utilise plus ou moins de courant. On peut également généraliser ce principes pour les différentes fonctions d'un programme qui n'ont pas la même consommation électrique.
+
+\subsection{Matériel utilisé}
+Nous pouvons désormais présenter le matériel utilisé dans ce projet. Nous utiliserons un kit ChipWhisperer de la marque NewAE prêtée par notre tuteur Guy Goniat. Ce kit est composé de trois cartes différentes :
+\begin{itemize}
+\item Une carte cible qui fera tourner le firmware cible, c'est à dire le firmware 
+\item
+
+\end{itemize}
+
+\subsection{Enjeux et objectifs du projet}
+Nous connaissons désormais tous les éléments nécessaires à la compréhension des enjeux et des objectifs de notre projet. L'objectif principal de ce projet est de récupérer la clé privée d'un utilisateur sans la connaitre, tout en restant dans un cadre légal. De ce fait nous attaquerons notre propre plateforme dédiée aux attaques par canaux auxiliaires. Les enjeux liés à ce projet sont nombreux, il faudra réussir à s’organiser autour d'un projet de groupe, comprendre
+
