@@ -29,9 +29,9 @@ Soit un message représenté par un entier naturel M strictement inférieur à n
 Nous avons la relation suivante:
 \begin{equation}
 \label{eq:chiffrement}
-\[
+
 C \equiv M^e \pmod{n}
-\]
+
 \end{equation}
 Ainsi pour chiffrer un message M on utilise une fonction d'exponentiation modulaire utilisant la clé publique.
 \\
@@ -43,9 +43,9 @@ Nous pouvons de la même manière déchiffrer le message chiffré à l'aide de l
 Nous avons ainsi la relation suivante :
 \begin{equation}
 \label{eq:dechiffrement}
-\[
+
 M \equiv C^d \pmod{n}
-\]
+
 \end{equation}
 
 
@@ -63,8 +63,8 @@ Dans notre cas nous allons nous intéresser aux attaques par consommation de cou
 \subsection{Matériel utilisé}
 Nous pouvons désormais présenter le matériel utilisé dans ce projet. Nous utiliserons un kit ChipWhisperer de la marque NewAE prêtée par notre tuteur Guy Goniat. Ce kit est composé de trois cartes différentes :
 \begin{itemize}
-\item Une carte cible qui fera tourner le firmware cible, c'est à dire le firmware 
-\item
+\item Une carte cible qui fera tourner le firmware cible, c'est à dire le firmware implémentant le RSA
+\item Une carte mère CW308 sur laquelle nous branchons 
 
 \end{itemize}
 
