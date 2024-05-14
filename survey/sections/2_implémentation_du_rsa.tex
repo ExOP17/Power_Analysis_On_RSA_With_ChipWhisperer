@@ -63,6 +63,15 @@ Il est aussi important de relever que la présence de l'algorithme d'exponentati
 Notre implémentation en C de ces deux algorithmes se trouve dans l'archive final du projet. Une fois ces primitives implémentées, il a été facile d'implémenter la génération de clé, le chiffrement et le déchiffrement, vous pouvez également retrouver ces implémentations en C dans l'archive final du projet.
 
 \subsection{Objectif 2048 bits}
-D'après les recommandation de l'ANSSI, un RSA implémenté avec les types de bases du C ($32$ bits), n'est pas du tout sécurisé
+D'après les recommandation de l'ANSSI \cite{anssi:guide}, un RSA implémenté avec les types de bases du C ($32$ bits), n'est pas du tout sécurisé. En effet, nous pouvons retrouver page 19 les règles suivantes :
+\begin{enumerate}
+  \item La taille minimale du module est de $2048$ bits, pour une utilisation ne devant
+pas dépasser la fin de l’année 2030.
+  \item Pour une utilisation à partir de l’année 2031, la taille minimale du module
+est de $3072$ bits.
+  \item Les exposants secrets doivent être de même taille que le module.
+  \item Pour les applications de chiffrement, les exposants publics doivent être strictement supérieurs à $2^{16} = 65536$.
+\end{enumerate}
+Afin d'attaquer une version du RSA qui pourrait être utilisé dans un cadre réel, nous allons donc devoir l'implémenter avec un module, notée $n$ précédemment, de 2048 bits ! Or, comme vu précédemment nous allons utiliser une machine en 32 bits, ce qui signifie que les types de bases sur lesquels les opérations élémentaires sont implémentées, ne dépasse pas 32 bits. Nous allons devoir créer et implémenter des opérations sur les grands nombres 
 \subsection{Implémentation du big int}
 \subsection{Conclusion}
