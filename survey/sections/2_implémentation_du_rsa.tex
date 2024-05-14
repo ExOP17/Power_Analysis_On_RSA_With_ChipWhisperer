@@ -76,7 +76,7 @@ Il est aussi important de relever que la présence de l'algorithme d’exponenti
 
 Une fois ces primitives implémentées, il a été facile d'implémenter la génération de clé, le chiffrement et le déchiffrement, vous pouvez également retrouver ces implémentations en C dans l'archive final du projet.
 
-\subsection{Rapprocher notre implémentation d'un cas d'usage}
+\subsection{Rapprocher notre implémentation d'un réel}
 A cette étape de l'implémentation du RSA, nous avons un RSA qui fonctionne sur 32 bits, le problème est que cette implémentation est très loin de la réalité.
 
 En effet, d'après les recommandation de l'ANSSI \cite{anssi:guide}, un RSA implémenté avec les types de bases du C ($32$ bits), n'est pas du tout sécurisé. Effectivement, nous pouvons retrouver page 19 les 4 règles suivantes :
