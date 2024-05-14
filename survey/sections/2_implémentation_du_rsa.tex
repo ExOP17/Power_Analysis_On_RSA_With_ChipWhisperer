@@ -1,14 +1,21 @@
-Après vous avoir introduit le contexte du projet, nous allons maintenant vous expliquer comment nous avons fait pour implémenter le crypto-système RSA.
+Après vous avoir introduit le contexte du projet, nous allons maintenant vous expliquer comment nous avons fait pour implémenter le crypto-système RSA sur un firmware customisé de la ChipWhisperer.
 
 \subsection{Implémentation sur 32 bits}
-Comme nous l'avons vu dans la section précédente, pour implémenter le RSA, nous avons besoin des algorithmes suivant :
-\begin{itemize}
-	\item Exponentiation modulaire (déterminer $a$ tel que $a \equiv x^n \bmod n$);
-	\item Inverse modulaire (étant donné $b$, trouver $a$ tel que $ab \equiv 1 \bmod n$).
-\end{itemize}
-Voici le pseudo code de ces deux algorithmes :
+Dans un premier temps, nous avons décidé d'implémenter le RSA sur des petits nombres de taille supportés nativement par le crypto-processeur. Ce dernier utilise une architecture de 32 bits, cela signifie que lorsqu'on stock un nombre dessus, ce nombre ne peut être que de 32 bits maximum (de $0$ à $2^{32} - 1$, pour des entiers positifs). Nous allons donc commencer par implémenter le RSA sur des nombres de 32 bits afin de pouvoir utiliser les opérations usuelles : addition, multiplication, réduction modulaire, ...\\
 
-\begin{algorithm}[H]
+Comme nous l'avons vu dans la section précédente, pour implémenter le RSA, nous avons besoin de savoir trois choses différentes :
+\begin{enumerate}
+	\item Générer des clés de chiffrement/déchiffrement ;
+	\item Chiffrer un message $m$, sur 32 bits $m < 2^{32}$;
+	\item Déchiffrer un chiffré $c$, sur 32 bits $c < 2^{32}$.
+\end{enumerate}
+
+Les algorithmes nécessaire pour effectuer ces opérations sont : la génération de nombres premiers aléatoire afin de déterminer $p$ et $q$, le calcul d'inverse modulaire pour déterminer la clé privée $d$ tel que $ed \equiv 1 [n]$ et l'exponentiation modulaire afin de chiffrer et déchiffrer, cf. équation (\ref{eq:chiffrement}) et (\ref{eq:dechiffrement}).\\
+
+Nous avons écrit le pseudo-code des ces deux algorithmes essentiels (cf. Algorithme \ref{alg:expomod} et \ref{alg:invmod}), pour ce qui est de leur implémentation en C dans le firmware de la ChipWhisperer, vous pouvez les retrouver dans l'archive finale du projet.
+
+\medskip
+\begin{algorithm}[p]
 \SetAlgoLined
 \KwIn{base, exponent, modulus}
 \KwOut{result}
@@ -22,10 +29,12 @@ $base \leftarrow base \mod modulus$\;
   $base \leftarrow (base \times base) \mod modulus$\;
 }
 \KwRet{$result$}\;
-\caption{Exponentiation Modulaire}
+\caption{Pseudo-code de l'exponentiation modulaire}
+\label{alg:expomod}
 \end{algorithm}
+\medskip
 
-\begin{algorithm}[H]
+\begin{algorithm}[p]
 \SetAlgoLined
 \KwIn{a, m}
 \KwOut{inverse modulaire}
@@ -48,19 +57,20 @@ $x \leftarrow 1$\;
   $x \leftarrow x + m0$\;
 }
 \KwRet{$x$}\;
-\caption{Inverse Modulaire}
+\caption{Pseudo-code de l'inverse modulaire}
+\label{alg:invmod}
 \end{algorithm}
 
-Nous pouvons voir que pour le premier algorithme, celui d'exponentiation rapide modulaire, nous utilisons un algorithme efficace contrairement à l'algorithme naïf qui consisterait a faire : $\underbrace{x \times x \times \ldots \times x}_{\text{n fois}}$. Afin de mettre en valeur la différence de complexité entre ces deux version, vous pouvez retrouver Figure \ref{fig:diff_complexite} la graphe représentant le nombre d'opération requis en fonction de l'exposant.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{fig/diff_complexite.png}
-    \caption{Comparaison des complexités des deux algorithmes d'exponentiation}
-    \label{fig:diff_complexite}
-\end{figure}
-Il est aussi important de relever que la présence de l'algorithme d’exponentiation rapide n'est pas un hasard, c'est grâce à lui que le système est faillible. En effet, si il rencontre un $1$ dans la représentation binaire du nombre il fait 2 calculs, sinon, il en fait 1 seul. Grâce à ça, il a une fuite de la clé qui s’opèrera sur la trace de consommation électrique.
+% Nous pouvons voir que pour le premier algorithme, celui d'exponentiation rapide modulaire, nous utilisons un algorithme efficace contrairement à l'algorithme naïf qui consisterait a faire : $\underbrace{x \times x \times \ldots \times x}_{\text{n fois}}$. Afin de mettre en valeur la différence de complexité entre ces deux version, vous pouvez retrouver Figure \ref{fig:diff_complexite} la graphe représentant le nombre d'opération requis en fonction de l'exposant.
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=\textwidth]{fig/diff_complexite.png}
+%     \caption{Comparaison des complexités des deux algorithmes d'exponentiation}
+%     \label{fig:diff_complexite}
+% \end{figure}
+% Il est aussi important de relever que la présence de l'algorithme d’exponentiation rapide n'est pas un hasard, c'est grâce à lui que le système est faillible. En effet, si il rencontre un $1$ dans la représentation binaire du nombre il fait 2 calculs, sinon, il en fait 1 seul. Grâce à ça, il a une fuite de la clé qui s’opèrera sur la trace de consommation électrique.
 
-Notre implémentation en C de ces deux algorithmes se trouve dans l'archive final du projet. Une fois ces primitives implémentées, il a été facile d'implémenter la génération de clé, le chiffrement et le déchiffrement, vous pouvez également retrouver ces implémentations en C dans l'archive final du projet.
+% Notre implémentation en C de ces deux algorithmes se trouve dans l'archive final du projet. Une fois ces primitives implémentées, il a été facile d'implémenter la génération de clé, le chiffrement et le déchiffrement, vous pouvez également retrouver ces implémentations en C dans l'archive final du projet.
 
 \subsection{Objectif 2048 bits}
 D'après les recommandation de l'ANSSI \cite{anssi:guide}, un RSA implémenté avec les types de bases du C ($32$ bits), n'est pas du tout sécurisé. En effet, nous pouvons retrouver page 19 les règles suivantes :
