@@ -55,16 +55,29 @@ Selon Wikipedia une attaque par canaux auxiliaires est une:
 En reprenant ce que nous vous avons présenter précédemment nous ne remettons pas en compte la robustesse du protocole RSA mais son implémentation utilisant l'algorithme d’exponentiation rapide.
 Ainsi il existe une multitude d'attaques par canaux auxiliaires comme les attaques temporelles basées sur le temps mis par l'algorithme pour effectuer certaines opération, les attaques pas sondage qui consiste à analyser un circuit en y posant une sonde ou encore les attaques par consommation de courant.
 Dans notre cas nous allons nous intéresser aux attaques par consommation de courant. Ces attaques sont basées sur le fait que chaque type d'opération que peut effectuer le processeur utilise plus ou moins de courant. On peut également généraliser ce principes pour les différentes fonctions d'un programme qui n'ont pas la même consommation électrique.
-
+\newpage
 \subsection{Matériel utilisé}
 Nous pouvons désormais présenter le matériel utilisé dans ce projet. Nous utiliserons un kit ChipWhisperer de la marque NewAE prêtée par notre tuteur Guy Goniat. Ce kit est composé de trois cartes différentes :
 \begin{itemize}
 \item Une carte cible qui fera tourner le firmware cible, c'est à dire le firmware implémentant le RSA;
 \item Une carte mère CW308 sur laquelle nous branchons la carte cible, cette carte permet d'alimenter la carte cible;
-\item Une carte d’acquisition servant d'interface entre l'ordinateur et la carte mère.Cette carte permet d'uploader le firmware sur la carte mère
-
+\item Une carte d’acquisition servant d'interface entre l'ordinateur et la carte mère.Cette carte permet d'uploader le firmware sur la carte mère, de communiquer avec la carte cible et de récupérer la consommation de courant de la carte cible sur l'ordinateur
 \end{itemize}
 
+Nous pouvons nous aider de la figure ci-dessous pour mieux comprendre l’organisation des différents composants:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{fig/materiel.png}
+    \caption{Matériel utilisé pour le projet}
+    \label{fig:materiel}
+\end{figure}
+
+Nous pouvons voir sur cette image 3 câbles différents. Le câble 1 permet de communiquer entre l’ordinateur et la carte d’acquisition. Il permet également d'alimenter l'ensemble du kit ChipWhisperer. Le câble 2 permet de récupérer la consommation du courant de la carte cible. Enfin le câble 3 permet de transmettre les informations entre la carte mère et la carte d’acquisition.
+Nous utiliserons également la librairie ChipWhisperer pour mener à bien ce projet.
+\newpage
 \subsection{Enjeux et objectifs du projet}
-Nous connaissons désormais tous les éléments nécessaires à la compréhension des enjeux et des objectifs de notre projet. L'objectif principal de ce projet est de récupérer la clé privée d'un utilisateur sans la connaitre, tout en restant dans un cadre légal. De ce fait nous attaquerons notre propre plateforme dédiée aux attaques par canaux auxiliaires. Les enjeux liés à ce projet sont nombreux, il faudra réussir à s’organiser autour d'un projet de groupe, comprendre
+Nous connaissons désormais tous les éléments nécessaires à la compréhension des enjeux et des objectifs de notre projet. L'objectif principal de ce projet est de récupérer la clé privée d'un utilisateur sans la connaitre, tout en restant dans un cadre légal. De ce fait nous attaquerons notre propre plateforme dédiée aux attaques par canaux auxiliaires. Les enjeux liés à ce projet sont nombreux, il faudra réussir à s’organiser autour d'un projet en équipe, comprendre le fonctionnement du kit ChipWhisperer et de la librairie associée et respecter les deadlines du planning établit lors de l'étude projet.
+
+\subsection{Conclusion}
+Ce projet vise ainsi à attaquer un protocole de cryptographie, le RSA, connu et utilisé pour sa robustesse. Cela sera possible grâce à l'implémentation du RSA et grâce à l'utilisation de matériels dédié à ce genre d'attaque. Un travail en équipe et une forte rigueur seront important dans ce projet puisque ce dernier est conséquent. Nous pouvons désormais nous intéresser un peu plus en détail à l'implémentation du RSA dans ce projet. 
 
