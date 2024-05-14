@@ -1,3 +1,4 @@
+\section{Contexte du projet}
 \subsection{Introduction}
 En terme de sécurité informatique les méthodes de chiffrement sont très importantes notamment dans le domaine des télécommunication. La cryptographie est donc une notion très importante dans la cybersécurité actuelle. Les 3 principes de la cryptographie sont la confidentialité, l'authenticité et l'intégrité.
 La confidentialité assure que le contenu d'un message chiffré ne peut être lu que par son destinataire.
@@ -5,6 +6,7 @@ L'authenticité assure l'origine du message, c'est à dire l'identité du messag
 Enfin l'intégrité assure la non-modification d'un message.
 Dans notre cas nous mettrons en oeuvre des moyens pour s'attaquer à la confidentialité d'un protocole cryptographique. 
 Ainsi nous allons vous présenter un algorithme connu pour sa robustesse et utilisé dans le monde entier, le protocole RSA.
+\newpage
 \subsection{Généralités sur le RSA}
 Nous ne pouvons pas commencer la présentation du projet sans présenter le protocole RSA.
 Le protocole RSA utilise une clé publique pour chiffrer le message et une clé privé pour le déchiffrer. Les clés publique et privé n'étant pas les mêmes, on parle de chiffrement asymétrique.
@@ -26,8 +28,25 @@ Nous avons la relation suivante:
 C \equiv M^e \pmod{n}
 \]
 
-\subsection{Algorithme d'exponentiation rapide}
-\subsection{Généralités sur les attaques par canaux auxiliaires (SCA)}
-\subsection{Objectifs/Enjeux du projet}
-\subsection{Introduction à la méthode de Colin-Wright (CW)}
-\subsection{Conclusion}
+Ainsi nous remarquons que la base du chiffrement et du déchiffrement repose sur une exponentiation modulaire. Le problème de l'exponentiation utilisé par le RSA est qu'elle ne peut pas être naïve, c'est à dire qu'on ne peut pas faire $ x^n = x*x*x...*x$ n fois. En effet, le RSA utilise des nombres de 2048 bits ce qui rend impossible l'utilisation d'un algorithme naïf.
+Ainsi nous allons vous présenter l'algorithme d'exponentiation rapide.
+\subsection{L’exponentiation rapide}
+L'algorithme d’exponentiation rapide permet de réduire drastiquement le temps de calcul en basant le calcul sur la représentation binaire de l'exposant. Ainsi nous pouvons analyser l'algorithme suivant :
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[scale=1]{fig/algo_exp_rap.png}
+%   \caption{Algorithme d'exponentiation rapide}
+% \end{figure}
+Nous pouvons remarquer que l'algorithme fonctionne de manière séquentielle. Si l'exposant n est impair on effectue deux multiplication et une division. Si n pair on effectue une multiplication et une division. On appelle également cet algorithme "Square and Multiply" et on comprend aisément pourquoi.
+Il est important de noter qu'en binaire un nombre pair possède un bit de poids faible égal à 0 tandis qu'un nombre impaire possède un bit de poids faible égal à 1.
+Ainsi en parcourant l'exposant du bit de poids fort au bit de poids faible on utilise des opérations différentes en fonction du bit rencontré.
+De ce fait l’algorithme d’exponentiation rapide est de complexité $log_2(n)$ tandis que l'algorithme d'exponentiation naïve est de complexité n ce qui représente une sacrée différence sur des grand nombres.
+Nous le verrons par la suite mais cette implémentation du RSA avec l'algorithme d'exponentiation est sensible aux attaques par canaux auxiliaires.
+\newpage
+\subsection{Attaques par canaux auxiliaire}
+Il est désormais temps de vous introduire au concept d'attaque par canaux auxiliaires.
+Selon Wikipedia une attaque par canaux auxiliaires est une:
+"Attaque informatique qui, sans remettre en cause la robustesse théorique des méthodes et procédures de sécurité, recherche et exploite des failles dans leur implémentation, logicielle ou matérielle."
+En reprenant ce que nous vous avons présenter précédemment nous ne remettons pas en compte la robustesse du protocole RSA mais son implémentation utilisant l'algorithme d’exponentiation rapide.
+Ainsi il existe une multitude d'attaques par canaux auxiliaires comme les attaques temporelles basées sur le temps mis par l'algorithme pour effectuer certaines opération, les attaques pas sondage qui consiste à analyser un circuit en y posant une sonde ou encore les attaques par consommation de courant.
+Dans notre cas nous allons nous intéresser aux attaques par consommation de courant.
