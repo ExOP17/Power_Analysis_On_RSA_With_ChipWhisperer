@@ -1,9 +1,60 @@
 \subsection{Introduction}
-\subsection{Installation de Colin-Wright (CW)}
-\subsection{Fonctionnement de Colin-Wright (CW)}
+Dans cette partie nous allons voir comment l'attaque par analyse de consomation a été mise en place, c'est à dire comment fonctionne notre kit chipwhisperer et ce que nous avons fait dessu. Ceci comprend l'explication des firmwares, l'obtention et l'analyses des résultats obetnus.
+\subsection{Présentation de la Chip Whisperer}
+Le kit Chip Whisperer est composée de :
+
+\begin{itemize}
+\item Carte d'acquisition : Comprend les sondes et les amplificateurs nécessaires pour mesurer la consommation de puissance ou les signaux électromagnétiques.
+\item Carte cible : Une carte cible sur laquelle se trouve le microcontrôleur ou le dispositif à tester.
+\item Carte "mère": carte qui permet de de recevoir la carte cible et d'envoyer les signaux à la carte d'acquisition
+\end{itemize}
+
+\subsection{Installation de la Chip Whisperer (CW)}
+Tout d'abord, nous avons pris en main le matériel, nous avons donc découvert les différentes cartes qui étaients à notre disposition dans le kit fournis.
+Deuxièment, nous avons branchés physiquement la carte d'acquisition à un ordinateur via un port USB, c'est cette carte qui nous enverra la consomation de notre cible.
+
+
+Nous nous sommes ensuite penché sur la connexion avec un ordinateur, afin de pouvoir communiquer avec la Chip. Nous avons du chercher longement afin de trouver comment nous connecter à cette carte via l'ordinateur. Pour ce faire, nous avons principalement consulté le wiki chipwhisperer et d'autres forums afin de trouver une solution. 
+Nous avons donc commencer par installer les différents packages nécessaires pour utiliser la carte. 
+"import chipwhisperer as cw"
+
+Ensuite nous avons installer Jupyter Notebook, qui est un outil simple et accessible pour visualiser et organiser notre connexion et notre communication avec la carte. 
+Il nous permetais de lancer chaque commande séparément et d'avoir le retour de la carte en conséquence.
+Nous devions aussi nous mettre sous un environement python "pyenv" pour que notre jupyter fonctionne.
+\subsection{Fonctionnement de la Chip Whisperer (CW)}
+Lorsque la carte a été connectée avec succés, nous avons eu besoin de connaitre les différentes commandes associés à cette carte afin de faire ce que nous voulions dessus.
+Nous nous donc reportés au wiki de cette section qui est : http://wiki.newae.com/SimpleSerial .
+La carte communique donc en SimpleSerial, le protocole de communication utilisé pour presque tous les démonstrations de ChipWhisperer.
+\icon{Capture_commandes_SimpleSerial.png}
+
 \subsection{Introduction avec un firmware déjà fait}
+Maintenant que nous pouvons communiquer avec notre carte, et que nous possèdons les commandes associés à ce firmware, nous avons pu tester les attaques pré-enregistrées dans la carte. 
+Nous avons donc tester une attaque classique sur le RSA, grace aux commandes suivantes: 
+On va chercher le bon firmware qui correspond à une attaque sur le RSA et on identifie le type de carte cible qui est connecté physiquement.
+hardware\victims\firmware\simpleserial-rsa
+make PLATFORM=CW303
+Ensuite, nous effectuons une commande qui permet de définir une commande dans ce firmware. Faire 't' va donc appeler la fonction real_dec (Vrai déchiffrage)
+
+simpleserial_addcmd('t', 0,  real_dec);
+
+Avec ces commandes, nous avons donc eu des traces de consomations qui nous permetais de retrouver la clé privée qui a été utilisée lors de ce chiffrement RSA.
 \subsection{Conception de notre firmware}
+Précédemment, nous utilisions un firmware déjà créer par ChipWhisperer, c'est à dire que toutes les fonction de bases pour implémenter le RSA étaient déjà faites, nous n'avions pu qu'à les utiliser. L'avantage d'utiliser son propre firmware est de se mettre en conditions réelles, de pouvoir effectuer toutes les opérations voulues et de les implémenter sous même.
+Dans cette partie, nous allons voir comment nous avons créer nos propres fonction avec nos propres commandes.
+
 \subsection{Cryptanalyse}
+Une fois que nous avions les traces de consomations, nous devons les exploitées afin de retrouver la clé privée utiliser et donc retrouver le message en clair. 
+Dans nos traces, comme notre fonction qui lit les valeurs de consomation commence de la fin, nous devons lire à partir de la fin dans notre trace, ce qui correspond au début de nos valeurs. 
+Ensuite, nous devons réussir à identifer des patterns visuellement, c'est a dire des formes qui se répettent dans notre graphique. 
+Apres cela, nous devions tester les formes si elles correspondaient à un 0 ou un. Nous essayons de déchiffer le message avec les deux clés obtenues et nous regardions quelle clé était la bonne.
 \subsection{Automatisation}
+La partie automatisation est assez importante car si nous devions déchiffer sur 2048 bits, c'est à dire analyser une trace qui comprendrais 2048 pics de consomations différents, visuellement, la tache s'averrerait longue et fastidieuse. L'automatisation d'une recherche de clés est donc essentielle et nous permet de gagner du temps d'analyse.
+Pour cette automatisation, nous avons choisis de la réaliser en python car ce language possède de nombreuses biliothèques et nous semblait adéquat pour cette partie.
+Afin de réaliser l'automatisation, nous avons commencer par ranger les valeurs de consomations dans un tableau. 
+Ensuite nous avons commencer par améliorer la lisibilité de notre trace grace un algorithme de lissage de courbe ...
+Enfin, lorsque la courbe est lisée nous pouvions utiliser l'algorithme de Person qui permet, une fois le partern trouvé, donner un coefficient de corrélation entre ce qu'il est en train de parcourir est le partern définis.
+
 \subsection{Validation de l'automatisation}
+Afin de valider notre automatisation, 
 \subsection{Conclusion}
+En conclusion la partie attaque de ce projet a été la partie finale 
