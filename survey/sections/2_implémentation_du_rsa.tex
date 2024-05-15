@@ -40,7 +40,7 @@ $base \leftarrow base \mod modulus$\;
 \begin{algorithm}[p]
 \SetAlgoLined
 \KwIn{a, m}
-\KwOut{inverse modulaire}
+\KwOut{inverse de $a$ modulo $m$}
 $m0 \leftarrow m$\;
 $y \leftarrow 0$\;
 $x \leftarrow 1$\;
@@ -64,7 +64,7 @@ $x \leftarrow 1$\;
 \label{alg:invmod}
 \end{algorithm}
 
-Afin d'illustrer la différence de complexité entre les deux algorithmes d'exponentiation binaire : le naif et le rapide, vous pouvez retrouver sur la Figure \ref{fig:diff_complexite} le graphe du nombres d'opération par rapport à l'exposant utilisé. On se rends compte que l'exponentiation rapide est bien plus efficace !
+Afin d'illustrer la différence de complexité entre les deux algorithmes d'exponentiation : le naïf et le rapide, vous pouvez retrouver sur la Figure \ref{fig:diff_complexite} le graphe du nombres d'opération par rapport à l'exposant utilisé. On se rends compte que l'exponentiation rapide est bien plus efficace !
 % Nous pouvons voir que pour le premier algorithme, celui d'exponentiation rapide modulaire, nous utilisons un algorithme efficace contrairement à l'algorithme naïf qui consisterait a faire : $\underbrace{x \times x \times \ldots \times x}_{\text{n fois}}$. Afin de mettre en valeur la différence de complexité entre ces deux version, vous pouvez retrouver Figure \ref{fig:diff_complexite} la graphe représentant le nombre d'opération requis en fonction de l'exposant.
 \begin{figure}[H]
     \centering
@@ -102,13 +102,13 @@ Prenons un exemple concret : supposons que notre grand entier soit \texttt{0xABC
 \item Chunk 4: \texttt{0x90EF}
 \end{itemize}
 
-Chaque chunk peut être représenté par un entier de 16 bits dans la mémoire du système embarqué. En utilisant cette méthode de découpage, nous pouvons stocker et manipuler des grands entiers même dans des systèmes avec des limitations de taille de données.\\
+Chaque chunk peut être représenté par un entier de 16 bits dans la mémoire du système embarqué. En utilisant cette méthode de découpage, nous pouvons stocker et manipuler des grands entiers même dans des systèmes avec des limitations de taille de données.
 
-Si nous utilisons des sous-entiers de 16 bits et pas de 32 bits c'est parce que le 32 bits servira de type d'overflow, en effet lorsqu'on aura une sous opération qui dépassera la taille d'un chunk alors un entier de 32 bits permettra de résoudre ce problème.\\
+Si nous utilisons des sous-entiers de 16 bits et pas de 32 bits c'est parce que le 32 bits servira de type d'overflow, en effet lorsqu'on aura une sous opération qui dépassera la taille d'un chunk alors un entier de 32 bits permettra de résoudre ce problème.
 
 Sachant que chaque chunk est sur $16$ bits c'est comme si nous avons une représentation du nombre en base $2^{16}$, nous n'avons ``plus'' qu'a considéré un chunk comme un symbole de la base $2^{16}$ et implémenté les opérations usuelles dessus.\\
 
-Cette méthode fonctionne pour l'addition et la soustraction, mais pour les opérations d'inverse modulaire, de multiplication modulaire et de division, cela ne fonctionne plus et il faut utiliser des algorithmes plus poussés, nous nous sommes basé sur ceux du livre ``Handbook of Applied Cryptography'' \cite{hac:ch14}. Nous avons réussi à implémenter les fonctions suivante :
+Cette méthode fonctionne pour l'addition et la soustraction, mais pour les opérations d'inverse modulaire, de multiplication modulaire et de division, cela ne fonctionne plus et il faut utiliser des algorithmes plus poussés, nous nous sommes basé sur ceux du chapitre 14 du livre ``Handbook of Applied Cryptography'' \cite{hac:ch14}. Nous avons réussi à implémenter les fonctions suivante :
 \begin{figure}[H]
 \begin{minted}{C}
 uint32_t bi_add(bigint_t* out, bigint_t* a, bigint_t* b);
