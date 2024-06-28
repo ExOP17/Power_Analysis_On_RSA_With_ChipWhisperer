@@ -12,13 +12,3 @@ To set up it we use a ChipWhisperer
 cd src/
 sudo make PLATFORM=CW308_STM32F3
 ```
-
-## Todo
-
-- Creating our own big int library
-- Learn to use Makefile
-
-dossier PRJ 
-git hub + Chip au meme niveau
-git clone POwer 
-
