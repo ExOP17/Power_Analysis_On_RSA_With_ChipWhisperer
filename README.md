@@ -1,4 +1,4 @@
-# Power Analysis On RSA With ChipWhisperer
+# Simple Power Analysis on RSA with a ChipWhisperer
 
 ![Thumbnail](/assets/img/readme_thumbnail.png "Thumbnail")
 	
