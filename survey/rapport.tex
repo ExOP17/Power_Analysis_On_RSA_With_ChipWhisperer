@@ -1,0 +1,65 @@
+% Définitions de la class
+\documentclass[12pt]{article}
+
+% Import du template
+\usepackage{template_cr}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{ma_biblio.bib} %Imports bibliography file
+
+\usepackage[ruled,vlined]{algorithm2e}
+
+% Définition des variables d'environnement
+\makeatletter
+	\title{TP 3 - Programmation Réseau}	\let\Title\@title
+	\author{Etienne RICHARD, Matthieu CIZDZIEL et Mathis MOGUEDET} \let\Author\@author
+	\date{\today}           	\let\Date\@date
+	\newcommand{\UE}{Attaque par cannaux auxiliaires : Cryptanalyse du système RSA}
+\makeatother
+
+% Retirons les indentations des paragraphes
+\setlength{\parindent}{0pt}
+
+% \addbibresource{sample.bib} %Imports bibliography file
+
+%% Nécessite biber
+% sudo pacaman -Syu biber
+%% Commande de compilation : 
+% pdflatex -shell-escape rapport.tex; biber -shell-escape rapport; pdflatex -shell-escape rapport.tex
+
+\begin{document}
+\maketitle
+\pagebreak
+
+\tableofcontents
+\pagebreak
+
+\section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
+Durant notre 2ème année de PEI (Parcours Élève Ingénieur) nous avons été amené à entreprendre un projet pluridisciplinaire, c'est à dire un projet traitant d'un sujet lié à plusieurs UE (matière). Sachant que nous allons nous orienter vers un cycle ingénieur Cyberdéfense, nous avons décider de traiter d'un sujet qui allie à la fois Mathématiques, Informatique et Électronique. Le sujet de ce projet est : ``Attaque par canaux auxiliaires : Cryptanalyse du système RSA'', l'UE de ce projet sera encadré par Mme. Fatima Zahraa Kachkouch et notre tuteur sera M. Guy Gogniat. En effet, l'essor des technologies de chiffrement est indissociable de la sécurisation des communications et des données dans un monde de plus en plus connecté. Parmi les algorithmes de chiffrement les plus utilisés, le RSA (Rivest-Shamir-Adleman) occupe une place prépondérante. Son utilisation repose sur des principes mathématiques solides, mais sa sécurité dépend également de la robustesse de son implémentation. Dans le cadre de ce rapport, nous nous penchons sur l'implémentation du crypto-système RSA sur un firmware customisé de la ChipWhisperer. Nous détaillons les différentes étapes de cette implémentation, mettant en lumière les défis techniques rencontrés et les solutions adoptées pour les surmonter. En outre, nous examinons les implications de notre travail pour la sécurisation des systèmes embarqués et les possibilités d'attaques par canaux auxiliaires sur le RSA.
+
+\section{Définitions et notations}
+\input{sections/0_definition_notation}
+
+\pagebreak
+\section{Contexte du projet}
+\input{sections/1_contexte_du_projet}
+
+\pagebreak
+\section{Implémentation du RSA}
+\input{sections/2_implémentation_du_rsa}
+
+\section{Attaque}
+\input{sections/3_attaque}
+
+
+\section*{Conclusion}
+\addcontentsline{toc}{section}{Conclusion}
+La mise en œuvre du crypto-système RSA sur un firmware personnalisé de la ChipWhisperer représente un défi technique significatif, mais aussi une opportunité d'approfondir notre compréhension des mécanismes de chiffrement et des contraintes liées aux environnements embarqués. Notre travail nous a permis de mettre en évidence les différentes étapes de l'implémentation du RSA, en mettant l'accent sur les adaptations nécessaires pour surmonter les limitations matérielles et les exigences de sécurité. Cependant, des défis subsistent, notamment en ce qui concerne la sécurisation des opérations de réduction modulaire et la prévention des attaques par canaux auxiliaires. Néanmoins, notre exploration ouvre la voie à de futures recherches visant à renforcer la sécurité des systèmes embarqués et à améliorer la résilience des algorithmes de chiffrement face aux menaces émergentes.
+
+% bibliography
+\medskip
+\printbibliography
+% \printbibliography %Prints the entire bibliography with the title "Whole bibliography"
+
+
+\end{document}
